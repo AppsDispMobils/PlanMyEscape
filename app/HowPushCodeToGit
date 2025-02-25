@@ -1,6 +1,6 @@
 Para subir codigo al git:
 1-estar en la rama que quieres modificar
 2- git status (te dira que ficheros tienes modificados)
-3- git add/pathFichero
+3- git add <pathFichero>
 3-git commit -m "mensaje que se mostrara"
 4-git push origin <nombre rama>
