@@ -24,6 +24,7 @@ T2. Version Control and DevOps (2 Points)
    • T2.4 Include a CONTRIBUTING.md file outlining the team's branching strategy.
    • T2.5 Set up required remote and local branches.
    • T2.6 Push the initial code to GitHub.
+----HASTA AQUI---
    • T2.7 Create the first release using GitHub Actions.
 
 T3. Core Implementation (4 Points)
