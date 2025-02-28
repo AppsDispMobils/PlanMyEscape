@@ -152,13 +152,6 @@ fun BottomNavigationBar(
             onClick = { navController.navigate("home")}
         )
 
-        NavigationBarItem(
-            icon = { Icon(Icons.Filled.Explore, contentDescription = "Explorar") },
-            label = { Text("Explore")},
-            selected = selectedIndex == 2,
-            onClick = { navController.navigate("explore")}
-        )
-
 
     }
 }
