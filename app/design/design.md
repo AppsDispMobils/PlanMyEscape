@@ -13,6 +13,9 @@ graph TD
     D <--> K[User Preferences]
     H <--> L[Your Trip Details]
 
+```
+
+```mermaid
 classDiagram
     class User {
         +String userId
@@ -48,4 +51,5 @@ classDiagram
         +void addItineraryItem()
         +void removeItineraryItem()
     }
+```
 
