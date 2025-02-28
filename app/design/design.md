@@ -51,5 +51,45 @@ classDiagram
         +void addItineraryItem()
         +void removeItineraryItem()
     }
+    class ItineraryItem {
+        +String title
+        +String description
+        +Date datetime
+    }
+
+    class Image {
+        +String imageUrl
+        +String description
+        +String destination
+        +void getImage(imageUrl)
+    }
+
+    class Booking {
+        +String bookingId
+        +String bookingType
+        +double price
+        +String status
+        +void confirmBooking()
+        +void cancelBooking()
+    }
+
+    class Destination {
+        +String name
+        +String country
+        +void getTopAttractions()
+        +void showLocation()
+        +void getNearbyPlaces()
+    }
+
+
+    User "1" -- "1" Preferences : has
+    User "1" -- "1" Authentication : manages
+    User "1" -- "*" Trip : owns
+    Trip "1" -- "*" ItineraryItem : contains
+    Trip "1" -- "*" Image : stores
+    Trip "1" -- "*" AIRecommendations : gets
+    Trip "1" -- "*" Booking : includes
+    Trip "1" -- "1" Destination : visits
+    ItineraryItem "0..1" -- "0..1" Booking : mayHave
 ```
 
