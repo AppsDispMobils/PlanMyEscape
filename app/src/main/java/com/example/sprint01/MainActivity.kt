@@ -13,13 +13,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.sprint01.ui.theme.Sprint01Theme
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        var isChecking = true
+        lifecycleScope.launch{
+            delay(3000L)
+            isChecking = false
+        }
+
+        installSplashScreen().apply {
+            setKeepOnScreenCondition {
+                isChecking
+            }
+        }
+
         setContent {
             Sprint01Theme {
+
                 MainScreen()
             }
         }
