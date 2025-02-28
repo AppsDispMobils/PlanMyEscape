@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import com.example.sprint01.R
 import org.w3c.dom.Text
 @Composable
-fun TermsConditionsScreen(navController: NavHostController) {
+fun TermsConditionsScreen(navController: NavHostController)  {
     Column (
         modifier = Modifier
             .fillMaxWidth()

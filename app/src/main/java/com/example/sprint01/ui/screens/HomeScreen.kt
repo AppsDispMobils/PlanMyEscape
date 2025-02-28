@@ -34,7 +34,7 @@ import com.example.sprint01.R.color.icon_color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController)  {
 
     var selectedIndex by remember { mutableStateOf(0) }
 
