@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sprint01</string>
+    <string name="username">user</string>
+    <string name="password">123</string>
+    <string name="about_us">About Us</string>
+    <string name="about_us1">Destinify is an application developed by two students from UDL Igualada, which is in Beta phase, that allows you to plan and manage your trips easily and quickly.</string>
+    <string name="about_us2">Developed by the Destinify team. All rights are reserved, and we have no problem using justice.</string>
+    <string name="terms_and_condi">Terms and Conditions</string>
+    <string name="terms_and_condi0">Welcome to Destinify. By accessing and using our application, you agree to comply with the following terms and conditions. If you do not agree with these terms, we ask that you do not use our application.</string>
+    <string name="terms_and_condi1">1. Use of the Application\nThe Destinify application allows you to plan and manage trips. You agree to use this application only for lawful purposes and in accordance with these Terms and Conditions. Use of the application for illegal or unauthorized activities is prohibited.</string>
+    <string name="terms_and_condi2">2. Termination\nDestinify reserves the right to suspend or terminate your account at any time and without notice if misuse of the application is detected or if you violate these terms.</string>
+    <string name="terms_and_condi3">3. Applicable Law\nThese Terms and Conditions shall be governed by and construed in accordance with the laws of the Spanish state, without regard to its conflict of law provisions. Any dispute arising from these terms shall be resolved in the competent courts of the Superior Court of Justice of Catalonia.</string>
+    <string name="settings"> Settings</string>
+    <string name="change_password">Change password </string>
+    <string name="volver"> Back</string>
+    <string name="change_background">Change Background </string>
+</resources>
