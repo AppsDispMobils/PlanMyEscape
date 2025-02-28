@@ -37,41 +37,9 @@ import com.example.sprint01.R.color.icon_color
 fun HomeScreen(navController: NavController) {
 
     var selectedIndex by remember { mutableStateOf(0) }
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    val scope = rememberCoroutineScope()
 
-    ModalNavigationDrawer(
-        drawerContent = {
-            ModalDrawerSheet {
-                Column (
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .verticalScroll(rememberScrollState())
-                ){
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text("Menu")
-                    HorizontalDivider()
 
-                    NavigationDrawerItem(
-                        modifier = Modifier.fillMaxHeight(),
-                        label = { Text("About Us") },
-                        selected = false,
-                        onClick = { navController.navigate("aboutUs")}
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
 
-                    NavigationDrawerItem(
-                        modifier = Modifier.fillMaxHeight(),
-                        label = { Text("Terms and Conditions") },
-                        selected = false,
-                        onClick = { navController.navigate("termsConditions")}
-                    )
-                }
-            }
-
-        },
-        drawerState = drawerState
-    ) {
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -82,19 +50,6 @@ fun HomeScreen(navController: NavController) {
                             horizontalArrangement = Arrangement.Center
                         ) {
                             Text("Destinify", fontSize = 24.sp, textAlign = TextAlign.Center) }
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = {
-                            scope.launch {
-                                if(drawerState.isClosed) {
-                                    drawerState.open()
-                                } else {
-                                    drawerState.close()
-                                }
-                            }
-                        }) {
-                            Icon(Icons.Default.Menu, contentDescription = "Menu")
-                        }
                     },
                     actions = {
                         IconButton(
@@ -172,7 +127,7 @@ fun HomeScreen(navController: NavController) {
             }
 
         )
-    }
+
 
 
 }
