@@ -12,3 +12,40 @@ graph TD
     C <--> J[Explore]
     D <--> K[User Preferences]
     H <--> L[Your Trip Details]
+
+classDiagram
+    class User {
+        +String userId
+        +String name
+        +String email
+        +Sring password
+    }
+
+    class Authentication {
+        +void login(email, password)
+        +void logout()
+        +void resetPassword(email)
+    }
+
+    class Preferences {
+        +String userId
+        +Boolean notificationsEnabled
+        +String preferredLanguage
+        +String theme 
+        +void updatePreferences()
+    }
+
+    class AIRecommendations {
+        +void getPersonalizedRecommendations()
+    }
+
+    class Trip {
+        +String tripId
+        +String userId
+        +Date startDate
+        +Date endDate
+        +String destination
+        +void addItineraryItem()
+        +void removeItineraryItem()
+    }
+
