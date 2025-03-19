@@ -40,93 +40,93 @@ fun HomeScreen(navController: NavController)  {
 
 
 
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            Text("Destinify", fontSize = 24.sp, textAlign = TextAlign.Center) }
-                    },
-                    actions = {
-                        IconButton(
-                            onClick = {
-                                navController.navigate("settings")
-                            }
-                        ) {
-                            Icon(Icons.Outlined.Settings, contentDescription = "settings")
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text("Destinify", fontSize = 24.sp, textAlign = TextAlign.Center) }
+                },
+                actions = {
+                    IconButton(
+                        onClick = {
+                            navController.navigate("settings")
                         }
+                    ) {
+                        Icon(Icons.Outlined.Settings, contentDescription = "settings")
                     }
+                }
 
-                )
-            },
+            )
+        },
 
 
 
-            bottomBar = {
-                BottomNavigationBar(
-                    selectedIndex = selectedIndex,
-                    navController = navController
-                )
-            },
+        bottomBar = {
+            BottomNavigationBar(
+                selectedIndex = selectedIndex,
+                navController = navController
+            )
+        },
 
-            content = { padding ->
-                Column(
+        content = { padding ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.SpaceEvenly,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                IconButton(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding)
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.SpaceEvenly,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .fillMaxWidth()
+                        .weight(0.5f)
+                        .padding(horizontal = 16.dp, vertical = 56.dp)
+                        .border(2.dp, Color.Gray, RoundedCornerShape(24.dp)),
+
+                    onClick = {
+                        navController.navigate("programmedTrips")
+                    }
                 ) {
-                    IconButton(
+                    Row(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(0.5f)
-                            .padding(horizontal = 16.dp, vertical = 56.dp)
-                            .border(2.dp, Color.Gray, RoundedCornerShape(24.dp)),
-
-                        onClick = {
-                            navController.navigate("programmedTrips")
-                        }
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            Text("Programmed Trips")
-                        }
+                        Text("Programmed Trips")
                     }
-                    IconButton(
+                }
+                IconButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(0.5f)
+                        .padding(horizontal = 16.dp, vertical = 56.dp)
+                        .border(2.dp, Color.Gray, RoundedCornerShape(24.dp)),
+                    onClick = {
+                        navController.navigate("planNewTrip")
+                    }
+                ) {
+                    Row(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(0.5f)
-                            .padding(horizontal = 16.dp, vertical = 56.dp)
-                            .border(2.dp, Color.Gray, RoundedCornerShape(24.dp)),
-                        onClick = {
-                            navController.navigate("planNewTrip")
-                        }
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            Text("Plan New Trip")
-                        }
+                        Text("Plan New Trip")
                     }
-
                 }
 
             }
 
-        )
+        }
+
+    )
 
 
 
@@ -143,7 +143,7 @@ fun BottomNavigationBar(
             label = { Text("Profile") },
             selected = selectedIndex == 0,
             onClick = { navController.navigate("profile")}
-            )
+        )
 
         NavigationBarItem(
             icon = { Icon(Icons.Outlined.Home, contentDescription = "Inicio") },

@@ -2,4 +2,4 @@
 
 ## 🌿 Estrategia de Ramas
 
-Cada miembro del equipo trabajará de manera individual en una rama local, asegurando que los cambios se mantengan organizados antes de ser integrados en la rama principal.  
+Para la realización del proyecto, seguiremos un enfoque basado en sprints. Cada sprint tendrá su propia branch en el repositorio, lo que nos permitirá organizar y aislar los avances de manera clara.

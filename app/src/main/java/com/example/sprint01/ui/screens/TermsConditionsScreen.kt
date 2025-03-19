@@ -75,4 +75,3 @@ fun TermsConditionsScreen(navController: NavHostController)  {
     }
 }
 
-

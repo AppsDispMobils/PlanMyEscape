@@ -11,7 +11,6 @@ import com.example.sprint01.ui.screens.HomeScreen
 import com.example.sprint01.ui.screens.ProfileScreen
 import com.example.sprint01.ui.screens.SettingsScreen
 import com.example.sprint01.ui.screens.AboutUsScreen
-import com.example.sprint01.ui.screens.ExploreScreen
 import com.example.sprint01.ui.screens.TermsConditionsScreen
 import com.example.sprint01.ui.screens.ProgrammedTripsScreen
 import com.example.sprint01.ui.screens.PlanNewTripScreen
@@ -30,7 +29,6 @@ fun NavGraph(navController: NavHostController) {
         composable ("termsConditions") { TermsConditionsScreen(navController) }
         composable ("programmedTrips") { ProgrammedTripsScreen(navController) }
         composable ("planNewTrip") { PlanNewTripScreen(navController) }
-        composable ("explore") { ExploreScreen(navController) }
         composable ("tripDetails") { TripDetailsScreen(navController, null) }
     }
 
