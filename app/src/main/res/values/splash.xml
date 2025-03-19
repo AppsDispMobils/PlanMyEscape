@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.App.Starting" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="windowSplashScreenBackground">#202020</item>
+        <item name="android:windowSplashScreenBackground">@drawable/planmyescape</item>
         <item name="android:windowSplashScreenAnimatedIcon">@null</item>
-        <item name="android:windowSplashScreenBackground">@drawable/logodestinify</item>
         <!-- Set splash screen background color, drawable, etc. -->
-        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowSplashScreenBackground">@color/icon_color</item>
+
 
         <!-- Optionally make status bar transparent or a custom color -->
         <item name="android:statusBarColor">@android:color/transparent</item>
