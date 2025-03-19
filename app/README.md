@@ -1,8 +1,8 @@
-# 📍 Travel Planner App
+# 📍 Plan My Escape
 
 
 ## 🎯 Objetivo
-Crear el esqueleto del proyecto con los elementos principales y características esenciales.
+Crear una aplicación funcional basada en la planificación de viajes.
 
 ## 🚀 Tecnologías
 - Android Studio
@@ -14,7 +14,7 @@ Crear el esqueleto del proyecto con los elementos principales y características
 
 
 ## 📄 Documentación
-La documentación del proyecto se encuentra en la carpeta `design/`.
+La documentación del proyecto se encuentra en la carpeta `documentation/`.
 
 ## 🔗 Repositorio
 Este repositorio contiene el código fuente y las configuraciones necesarias para la implementación del proyecto.  
