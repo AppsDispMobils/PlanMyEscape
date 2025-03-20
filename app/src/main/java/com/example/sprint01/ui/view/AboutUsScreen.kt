@@ -1,4 +1,4 @@
-package com.example.sprint01.ui.screens
+package com.example.sprint01.ui.view
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.sprint01.R
+import com.example.sprint01.data.AppInfo
 
 @Composable
 fun AboutUsScreen(navController: NavHostController) {
@@ -25,7 +26,7 @@ fun AboutUsScreen(navController: NavHostController) {
     ) {
         // Título
         Text(
-            text = "About Us",
+            text = stringResource(id = R.string.about_us),
             style = TextStyle(fontSize = 32.sp, color = Color.Black)
         )
 
@@ -44,15 +45,26 @@ fun AboutUsScreen(navController: NavHostController) {
             style = TextStyle(fontSize = 14.sp, color = Color.Gray)
         )
 
+        Spacer(modifier = Modifier.height(50.dp))
+
+        Text(
+            text = stringResource(id = R.string.version1),
+            style = TextStyle(fontSize = 24.sp, color = Color.Black)
+        )
+        Text(
+            text = stringResource(id = R.string.version2) + (" ${AppInfo.versionName} (${AppInfo.versionCode})"),
+            style = TextStyle(fontSize = 18.sp, color = Color.Gray)
+        )
+
         Spacer(modifier = Modifier.height(40.dp))
 
         // Un botón back homeScreen
         Button(
-            onClick = { navController.navigate("home")},
+            onClick = { navController.navigate("settings")},
             modifier = Modifier.fillMaxWidth()
 
         ) {
-            Text(text = "Go Back")
+            Text(text = stringResource(id = R.string.about_usBoton))
         }
     }
 }
