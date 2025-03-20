@@ -10,7 +10,7 @@ import com.example.sprint01.ui.screens.LoginScreen
 import com.example.sprint01.ui.screens.HomeScreen
 import com.example.sprint01.ui.screens.ProfileScreen
 import com.example.sprint01.ui.screens.SettingsScreen
-import com.example.sprint01.ui.screens.AboutUsScreen
+import com.example.sprint01.ui.view.AboutUsScreen
 import com.example.sprint01.ui.screens.TermsConditionsScreen
 import com.example.sprint01.ui.view.ProgrammedTripsScreen
 import com.example.sprint01.ui.screens.PlanNewTripScreen

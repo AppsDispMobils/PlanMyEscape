@@ -23,9 +23,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.sprint01.R
 import com.example.sprint01.R.color.icon_color
 import com.example.sprint01.domain.model.Trip
 import com.example.sprint01.ui.screens.BottomNavigationBar
@@ -136,13 +138,13 @@ fun ProgrammedTripsScreen(
     if(showTripDialog) {
         AlertDialog(
             onDismissRequest = { showTripDialog = false },
-            title = { Text(text = if (isEditingTrip) "Editar Viaje" else "Añadir Viaje") },
+            title = { Text(text = if (isEditingTrip) stringResource(id = R.string.updt_trip) else stringResource(id = R.string.add_trip)) },
             text = {
                 Column {
                     OutlinedTextField(
                         value = tripDestination,
                         onValueChange = { tripDestination = it },
-                        label = { Text("Destino") },
+                        label = { Text(stringResource(id = R.string.trip_Card1)) },
                         modifier = Modifier.fillMaxWidth(),
                         isError = fieldError != null,
                         supportingText = {
@@ -154,7 +156,7 @@ fun ProgrammedTripsScreen(
                     OutlinedTextField(
                         value = startDate,
                         onValueChange = { startDate = it },
-                        label = { Text("Fecha de inicio") },
+                        label = { Text(stringResource(id = R.string.trip_Card2) + " (dd-MM-yyyy)") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 8.dp),
@@ -168,7 +170,7 @@ fun ProgrammedTripsScreen(
                     OutlinedTextField(
                         value = endDate,
                         onValueChange = { endDate = it },
-                        label = { Text("Fecha de final") },
+                        label = { Text(stringResource(id = R.string.trip_Card3) + " (dd-MM-yyyy)") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 8.dp),
@@ -210,12 +212,12 @@ fun ProgrammedTripsScreen(
                         }
                     }
                 ) {
-                    Text("Guardar")
+                    Text(stringResource(id = R.string.boton_addTrip1))
                 }
             },
             dismissButton = {
                 Button(onClick = { showTripDialog = false }) {
-                    Text("Cancelar")
+                    Text(stringResource(id = R.string.boton_addTrip2))
                 }
             }
         )
@@ -255,11 +257,15 @@ fun isValidDate(date: String): Boolean {
         val parsedDate = dateFormat.parse(date)
 
         // Verificar si la fecha es pasada
-            val today = Calendar.getInstance().toString()
-            val currentDate = dateFormat.parse(today)
+        val today = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }.time
 
 
-            if (parsedDate.before(currentDate)) {
+            if (parsedDate.before(today)) {
                 return false // La fecha es pasada
             }
 
@@ -287,9 +293,9 @@ fun TripCard(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(text = "Destino: ${trip.destination}", style = MaterialTheme.typography.titleMedium)
-            Text(text = "Fecha de inicio: ${trip.startDate}", style = MaterialTheme.typography.bodyMedium)
-            Text(text = "Fecha de fin: ${trip.endDate}", style = MaterialTheme.typography.bodyMedium)
+            Text(text = stringResource(id = R.string.trip_Card1) + ": ${trip.destination}", style = MaterialTheme.typography.titleMedium)
+            Text(text = stringResource(id = R.string.trip_Card2) + ": ${trip.startDate}", style = MaterialTheme.typography.bodyMedium)
+            Text(text = stringResource(id = R.string.trip_Card3) + ": ${trip.endDate}", style = MaterialTheme.typography.bodyMedium)
             Row {
                 IconButton(onEdit) {
                     Icon(
