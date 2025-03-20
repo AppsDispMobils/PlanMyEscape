@@ -11,5 +11,8 @@ interface TripRepository {
     fun updateTrip(trip: Trip)
 
     fun getItineraryItemsfromTrip(tripId: Int): List<ItineraryItem>
+    fun addItineraryItem(itineraryItem: ItineraryItem)
+    fun deleteItineraryItem(itineraryItemId: Int)
+    fun updateItineraryItem(itineraryItem: ItineraryItem)
 
 }
