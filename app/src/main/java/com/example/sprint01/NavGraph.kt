@@ -12,10 +12,9 @@ import com.example.sprint01.ui.screens.ProfileScreen
 import com.example.sprint01.ui.screens.SettingsScreen
 import com.example.sprint01.ui.screens.AboutUsScreen
 import com.example.sprint01.ui.screens.TermsConditionsScreen
-import com.example.sprint01.ui.screens.ProgrammedTripsScreen
+import com.example.sprint01.ui.view.ProgrammedTripsScreen
 import com.example.sprint01.ui.screens.PlanNewTripScreen
-import com.example.sprint01.ui.screens.Trip
-import com.example.sprint01.ui.screens.TripDetailsScreen
+import com.example.sprint01.ui.view.TripDetailsScreen
 
 
 @Composable
@@ -29,7 +28,12 @@ fun NavGraph(navController: NavHostController) {
         composable ("termsConditions") { TermsConditionsScreen(navController) }
         composable ("programmedTrips") { ProgrammedTripsScreen(navController) }
         composable ("planNewTrip") { PlanNewTripScreen(navController) }
-        composable ("tripDetails") { TripDetailsScreen(navController, null) }
+        composable(
+            route = "tripDetails/{tripId}",
+            arguments = listOf(navArgument("tripId") { type = NavType.IntType})
+        ) {
+            TripDetailsScreen(navController = navController)
+        }
     }
 
 }
