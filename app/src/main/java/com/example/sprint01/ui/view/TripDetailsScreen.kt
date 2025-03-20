@@ -52,6 +52,10 @@ fun TripDetailsScreen(
     var description by remember { mutableStateOf("") }
     var date by remember { mutableStateOf("") }
 
+    //Validación de los inputs
+    var dateError by remember { mutableStateOf<String?>(null) }
+    var fieldError by remember { mutableStateOf<String?>(null) }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -133,7 +137,13 @@ fun TripDetailsScreen(
                         value = itineraryItemTitle,
                         onValueChange = { itineraryItemTitle = it },
                         label = { Text("Titulo") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        isError = fieldError != null,
+                        supportingText = {
+                            if (fieldError != null){
+                                Text(text = fieldError!!, color = Color.Red)
+                            }
+                        }
                     )
                     OutlinedTextField(
                         value = description,
@@ -141,7 +151,13 @@ fun TripDetailsScreen(
                         label = { Text("Descripción") },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 8.dp)
+                            .padding(top = 8.dp),
+                        isError = fieldError != null,
+                        supportingText = {
+                            if (fieldError != null){
+                                Text(text = fieldError!!, color = Color.Red)
+                            }
+                        }
                     )
                     OutlinedTextField(
                         value = date,
@@ -149,34 +165,45 @@ fun TripDetailsScreen(
                         label = { Text("Fecha") },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 8.dp)
+                            .padding(top = 8.dp),
+                        isError = dateError != null,
+                        supportingText = {
+                            if (dateError != null) {
+                                Text(text = dateError!!, color = Color.Red)
+                            }
+                        }
                     )
                 }
             },
             confirmButton = {
                 Button(
                     onClick = {
-                        if (isEditingItineraryItem) {
-                            viewModel.updateItineraryItem(
-                                ItineraryItem(
-                                    Id = currentItineraryItemId,
-                                    title = itineraryItemTitle,
-                                    description = description,
-                                    tripId = viewModel.tripId,
-                                    date = date
+                        fieldError = if (validateFields(itineraryItemTitle, description, date)) null else "Faltan campos requeridos"
+                        dateError = if (isValidDate(date)) null else "Fecha no permitida"
+
+                        if ((fieldError == null) && (dateError == null)){
+                            if (isEditingItineraryItem) {
+                                viewModel.updateItineraryItem(
+                                    ItineraryItem(
+                                        Id = currentItineraryItemId,
+                                        title = itineraryItemTitle,
+                                        description = description,
+                                        tripId = viewModel.tripId,
+                                        date = date
+                                    )
                                 )
-                            )
-                        } else {
-                            viewModel.addItitneraryItem(
-                                ItineraryItem(
-                                    title = itineraryItemTitle,
-                                    description = description,
-                                    tripId = viewModel.tripId,
-                                    date = date
+                            } else {
+                                viewModel.addItitneraryItem(
+                                    ItineraryItem(
+                                        title = itineraryItemTitle,
+                                        description = description,
+                                        tripId = viewModel.tripId,
+                                        date = date
+                                    )
                                 )
-                            )
+                            }
+                            showItineraryItemDialog = false
                         }
-                        showItineraryItemDialog = false
                     }
                 ) {
                     Text("Guardar")

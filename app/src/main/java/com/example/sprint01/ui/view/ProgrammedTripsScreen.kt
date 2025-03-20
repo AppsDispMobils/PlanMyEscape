@@ -1,5 +1,6 @@
 package com.example.sprint01.ui.view
 
+import android.icu.util.Calendar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -19,7 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -30,6 +30,8 @@ import com.example.sprint01.R.color.icon_color
 import com.example.sprint01.domain.model.Trip
 import com.example.sprint01.ui.screens.BottomNavigationBar
 import com.example.sprint01.ui.viewmodel.ProgrammedTripsViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,6 +49,11 @@ fun ProgrammedTripsScreen(
     var tripDestination by remember { mutableStateOf("") }
     var startDate by remember { mutableStateOf("") }
     var endDate by remember { mutableStateOf("") }
+
+    //Validacion datos de entrada
+    var dateError by remember { mutableStateOf<String?>(null) }
+    var fieldError by remember { mutableStateOf<String?>(null) }
+
 
 
 
@@ -136,7 +143,13 @@ fun ProgrammedTripsScreen(
                         value = tripDestination,
                         onValueChange = { tripDestination = it },
                         label = { Text("Destino") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        isError = fieldError != null,
+                        supportingText = {
+                            if (fieldError != null) {
+                                Text(text = fieldError!!, color = Color.Red)
+                            }
+                        }
                     )
                     OutlinedTextField(
                         value = startDate,
@@ -144,7 +157,13 @@ fun ProgrammedTripsScreen(
                         label = { Text("Fecha de inicio") },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 8.dp)
+                            .padding(top = 8.dp),
+                        isError = dateError != null,
+                        supportingText = {
+                            if(dateError != null) {
+                                Text(text = dateError!!, color = Color.Red)
+                            }
+                        }
                     )
                     OutlinedTextField(
                         value = endDate,
@@ -152,32 +171,43 @@ fun ProgrammedTripsScreen(
                         label = { Text("Fecha de final") },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 8.dp)
+                            .padding(top = 8.dp),
+                        isError = dateError != null,
+                        supportingText = {
+                            if(dateError != null) {
+                                Text(text = dateError!!, color = Color.Red)
+                            }
+                        }
                     )
                 }
             },
             confirmButton = {
                 Button(
                     onClick = {
-                        if(isEditingTrip) {
-                            viewModel.updateTrip(
-                                Trip(
-                                    Id = currentTripId,
-                                    destination = tripDestination,
-                                    startDate = startDate,
-                                    endDate = endDate
+                        dateError = if (areValidDates(startDate, endDate)) null else "Fechas no válidas"
+                        fieldError = if (validateFields(tripDestination, startDate, endDate)) null else "Faltan campos requeridos"
+
+                        if ((dateError == null) && (fieldError == null)){
+                            if (isEditingTrip) {
+                                viewModel.updateTrip(
+                                    Trip(
+                                        Id = currentTripId,
+                                        destination = tripDestination,
+                                        startDate = startDate,
+                                        endDate = endDate
+                                    )
                                 )
-                            )
-                        } else {
-                            viewModel.addTrip(
-                                Trip(
-                                    destination = tripDestination,
-                                    startDate = startDate,
-                                    endDate = endDate
+                            } else {
+                                viewModel.addTrip(
+                                    Trip(
+                                        destination = tripDestination,
+                                        startDate = startDate,
+                                        endDate = endDate
+                                    )
                                 )
-                            )
+                            }
+                            showTripDialog = false
                         }
-                        showTripDialog = false
                     }
                 ) {
                     Text("Guardar")
@@ -189,6 +219,53 @@ fun ProgrammedTripsScreen(
                 }
             }
         )
+    }
+
+}
+
+fun validateFields(firstInput: String, secondInput: String, thirdInput: String): Boolean {
+    var isValid = true
+
+    if (firstInput.isBlank()) { isValid = false }
+
+    if (secondInput.isBlank()) { isValid = false }
+
+    if (thirdInput.isBlank()) { isValid = false }
+
+    return isValid
+}
+
+fun areValidDates(startDate: String, endDate: String): Boolean {
+    if (!isValidDate(startDate) || !isValidDate(endDate) ) return false
+
+    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    dateFormat.isLenient = false
+    val start = dateFormat.parse(startDate)
+    val end = dateFormat.parse(endDate)
+    if (start != null) {
+        return start.before(end)
+    }
+    return false
+}
+
+fun isValidDate(date: String): Boolean {
+    return try {
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        dateFormat.isLenient = false // Evita que fechas como "30-02-2023" sean válidas
+        val parsedDate = dateFormat.parse(date)
+
+        // Verificar si la fecha es pasada
+            val today = Calendar.getInstance().toString()
+            val currentDate = dateFormat.parse(today)
+
+
+            if (parsedDate.before(currentDate)) {
+                return false // La fecha es pasada
+            }
+
+        true
+    } catch (e: java.text.ParseException) {
+        false
     }
 }
 
