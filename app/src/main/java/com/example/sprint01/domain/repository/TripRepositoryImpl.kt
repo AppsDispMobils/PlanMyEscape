@@ -27,7 +27,7 @@ class TripRepositoryImpl @Inject constructor() : TripRepository {
     }
 
     override fun updateTrip(trip: Trip) {
-        val index = itineraryItems.indexOfFirst { it.tripId == trip.Id }
+        val index = trips.indexOfFirst { it.Id == trip.Id }
         if (index != -1) {
             trips[index] = trip
         }
