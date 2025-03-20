@@ -18,5 +18,12 @@
     <string name="change_password">Cambiar Contraseña </string>
     <string name="volver"> Volver</string>
     <string name="change_background">Cambiar Fondo </string>
+    <string name="trip_Card1">Destino</string>
+    <string name="trip_Card2">Fecha de Inicio</string>
+    <string name="trip_Card3">Fecha de Final</string>
+    <string name="boton_addTrip1">Guardar</string>
+    <string name="boton_addTrip2">Cancelar</string>
+    <string name="add_trip">Añadir Viaje</string>
+    <string name="updt_trip">Editar Viaje</string>
 
 </resources>
