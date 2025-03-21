@@ -1,4 +1,4 @@
-package com.example.sprint01.ui.screens
+package com.example.sprint01.ui.view
 
 import android.content.Context
 import android.content.Intent
@@ -18,19 +18,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.sprint01.R
+import com.example.sprint01.ui.view.BottomNavigationBar
 import com.example.sprint01.ui.viewmodel.SettingsViewModel
 import java.util.Locale
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(navController: NavHostController) {
     val context = LocalContext.current
-    val viewModel: SettingsViewModel = viewModel()  // Obtener el ViewModel
+    val viewModel: SettingsViewModel = hiltViewModel()  // Obtener el ViewModel
     val sharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE)
-    val selectedLanguage by remember { mutableStateOf(sharedPreferences.getString("language", "es") ?: "es") }
 
     // Configuración de idioma
     val language = viewModel.language // Obtenemos el idioma desde el ViewModel
@@ -84,13 +86,8 @@ fun SettingsScreen(navController: NavHostController) {
                 // Cambiar idioma
                 LanguageDropdown(
                     selectedLanguage = language,
-                    onLanguageSelected = { newLang ->
-                        viewModel.updateLanguage(newLang) // Actualizamos el idioma en el ViewModel
-                        sharedPreferences.edit().putString("language", newLang).apply() // Guardamos en SharedPreferences
-                        LocaleHelper.setLocale(context, newLang) // Aplicamos el cambio de idioma
-                        restartApp(context) // Reiniciar la aplicación
-                    },
-                    availableLanguages = listOf("es", "en")
+                    onLanguageSelected = { newLang -> viewModel.updateLanguage(newLang) },
+                    availableLanguages = listOf("en", "es")
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -155,22 +152,4 @@ fun LanguageDropdown(
     }
 }
 
-// Helper functions to handle Locale changes
-object LocaleHelper {
-    fun setLocale(context: Context, languageCode: String) {
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val config = Configuration(context.resources.configuration)
-        config.setLocale(locale)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            context.createConfigurationContext(config)
-        }
-        context.resources.updateConfiguration(config, context.resources.displayMetrics)
-    }
-}
 
-fun restartApp(context: Context) {
-    val intent = Intent(context, context.javaClass)
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-    context.startActivity(intent)
-}
