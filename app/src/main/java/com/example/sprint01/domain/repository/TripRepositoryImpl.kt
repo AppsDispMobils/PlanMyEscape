@@ -1,5 +1,6 @@
 package com.example.sprint01.domain.repository
 
+import android.util.Log
 import com.example.sprint01.domain.model.ItineraryItem
 import com.example.sprint01.domain.model.Trip
 import javax.inject.Inject
@@ -15,6 +16,7 @@ class TripRepositoryImpl @Inject constructor() : TripRepository {
         return trips.map { trip ->
             trip.copy(itineraryItems = itineraryItems.filter { it.tripId == trip.Id })
         }
+
     }
 
     override fun addTrip(trip: Trip) {

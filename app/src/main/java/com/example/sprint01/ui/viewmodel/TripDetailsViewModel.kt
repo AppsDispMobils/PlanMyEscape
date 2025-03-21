@@ -30,16 +30,16 @@ class TripDetailsViewModel @Inject constructor(
     }
 
     private fun loadItineraryItems() {
-        Log.d("Itinerary","Cargando elementos de la lista: $itineraryItems")
         itineraryItems.clear()
-        Log.d("Itinerary","Limpiar elementos de la lista: $itineraryItems")
         itineraryItems.addAll(repository.getItineraryItemsfromTrip(tripId))
-        Log.d("Itinerary", "Mostrado en pantalla: $itineraryItems")
+        Log.d("Itinerary", "Showing all itinerary items")
     }
 
     fun addItitneraryItem(itineraryItem: ItineraryItem) {
         viewModelScope.launch {
             repository.addItineraryItem(itineraryItem)
+            Log.d("Itinerary", "Added new itinerary item:${itineraryItem.title}")
+
             loadItineraryItems()
         }
     }
@@ -47,14 +47,15 @@ class TripDetailsViewModel @Inject constructor(
     fun updateItineraryItem(itineraryItem: ItineraryItem) {
         viewModelScope.launch {
             repository.updateItineraryItem(itineraryItem)
+            Log.d("Itinerary", "Updated ${itineraryItem.title} itinerary item")
             loadItineraryItems()
         }
     }
 
     fun deleteItineraryItem(itineraryItemId: Int) {
-
-            repository.deleteItineraryItem(itineraryItemId)
-            loadItineraryItems()
+        repository.deleteItineraryItem(itineraryItemId)
+        Log.d("Itinerary", "Deleting itinerary item...")
+        loadItineraryItems()
 
     }
 }
