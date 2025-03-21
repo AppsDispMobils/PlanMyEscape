@@ -101,7 +101,7 @@ fun HomeScreen(navController: NavController) {
                                 horizontalArrangement = Arrangement.Center
                             ) {
                                 Text(
-                                    text = "Programmed Trips",
+                                    text = stringResource(id = R.string.ProgrammedTrips),
                                     fontSize = 18.sp,
                                     fontWeight = FontWeight.Medium,
                                     color = Color.Gray
@@ -125,7 +125,7 @@ fun HomeScreen(navController: NavController) {
                                     horizontalArrangement = Arrangement.Center
                                 ) {
                                     Text(
-                                        text = "Plan New Trip",
+                                        text = stringResource(id = R.string.Plan_New_Trip),
                                         fontSize = 18.sp,
                                         fontWeight = FontWeight.Medium,
                                         color = Color.Gray
@@ -155,7 +155,7 @@ fun BottomNavigationBar(
             },
             label = {
                 Text(
-                    text = "Profile",
+                    text = stringResource(id=R.string.Profile),
                     color = Color.Gray // Color del texto
                 )
             },
@@ -173,7 +173,7 @@ fun BottomNavigationBar(
             },
             label = {
                 Text(
-                    text = "Home",
+                    text = stringResource(id = R.string.Home),
                     color = Color.Gray // Color del texto
                 )
             },

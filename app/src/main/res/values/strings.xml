@@ -44,5 +44,9 @@
     <string name="boton_addTrip2">Cancelar</string>
     <string name="add_trip">Añadir Viaje</string>
     <string name="updt_trip">Editar Viaje</string>
-
+    <string name="ProgrammedTrips">Viajes Programados</string>
+    <string name="Plan_New_Trip">Planificar un nuevo Viaje</string>
+    <string name="Profile">Perfil</string>
+    <string name="Home">Inicio App</string>
+    <string name="Dark_Theme">Tema Oscuro</string>
 </resources>

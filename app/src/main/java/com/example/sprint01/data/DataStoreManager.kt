@@ -18,6 +18,7 @@ class DataStoreManager(private val context: Context) {
 
     private object PreferencesKeys {
         val USER_LANGUAGE = stringPreferencesKey("user_language")
+        val DARK_THEME = booleanPreferencesKey("dark_theme")
     }
 
     //  idioma (valor por defecto "es")
@@ -28,6 +29,13 @@ class DataStoreManager(private val context: Context) {
         .map { preferences ->
             preferences[PreferencesKeys.USER_LANGUAGE] ?: "es"
         }
+    val isDarkThemeFlow: Flow<Boolean> = context.dataStore.data
+        .catch { exception ->
+            if (exception is IOException) emit(emptyPreferences()) else throw exception
+        }
+        .map { preferences ->
+            preferences[PreferencesKeys.DARK_THEME] ?: false
+        }
 
     // Función para actualizar el idioma
     suspend fun setUserLanguage(language: String) {
@@ -35,5 +43,12 @@ class DataStoreManager(private val context: Context) {
             preferences[PreferencesKeys.USER_LANGUAGE] = language
         }
     }
+
+    suspend fun setDarkTheme(isDark: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[PreferencesKeys.DARK_THEME] = isDark
+        }
+    }
+
 
 }

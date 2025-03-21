@@ -17,13 +17,16 @@ class SharedPrefsManager @Inject constructor(
     }
 
 
-
     var userLanguage: String?
         get() = preferences.getString("user_language", "en")
         set(value) {
             preferences.edit().putString("user_language", value).apply()
 
-            languageChangeUtils.changeLanguage(context, value?:"en")
+            languageChangeUtils.changeLanguage(context, value ?: "en")
         }
 
-   }
+
+    var darkTheme: Boolean
+        get() = preferences.getBoolean("dark_theme", false)
+        set(value) = preferences.edit().putBoolean("dark_theme", value).apply()
+}

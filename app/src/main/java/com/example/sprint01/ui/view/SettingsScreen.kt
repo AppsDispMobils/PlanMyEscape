@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.sprint01.R
 import com.example.sprint01.ui.view.BottomNavigationBar
@@ -29,15 +30,16 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen(navController: NavHostController) {
+fun SettingsScreen(
+    navController: NavController,
+    viewModel: SettingsViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
-    val viewModel: SettingsViewModel = hiltViewModel()  // Obtener el ViewModel
     val sharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE)
 
     // Configuración de idioma
     val language = viewModel.language // Obtenemos el idioma desde el ViewModel
-
-    Spacer(modifier = Modifier.height(30.dp))
+    val isDarkTheme = viewModel.isDarkTheme
 
     Scaffold(
         topBar = {
@@ -82,23 +84,44 @@ fun SettingsScreen(navController: NavHostController) {
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = stringResource(id = R.string.about_us),
+                    fontSize = 18.sp,
+                    modifier = Modifier
+                        .clickable {navController.navigate("aboutUs") }
+                        .fillMaxWidth()
+                        .padding(10.dp)
 
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = stringResource(id = R.string.terms_and_condi),
+                    fontSize = 18.sp,
+                    modifier = Modifier
+                        .clickable {navController.navigate("termsConditions") }
+                        .fillMaxWidth()
+                        .padding(10.dp)
+
+                )
                 // Cambiar idioma
                 LanguageDropdown(
                     selectedLanguage = language,
                     onLanguageSelected = { newLang -> viewModel.updateLanguage(newLang) },
-                    availableLanguages = listOf("en", "es")
+                    availableLanguages = listOf("en", "es","pt")
                 )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ){
+                    Text(stringResource(id = R.string.Dark_Theme))
+                    Switch(
+                        checked = isDarkTheme as Boolean,
+                        onCheckedChange = {viewModel.updateDarkTheme(it)}
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                // Botón para volver a la Home Screen
-                Button(
-                    onClick = { navController.navigate("home") },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(text = stringResource(id = R.string.volver))
-                }
             }
         }
     )
@@ -114,6 +137,7 @@ fun LanguageDropdown(
     val languageDisplay = when (selectedLanguage) {
         "es" -> "Español"
         "en" -> "English"
+        "pt" -> "Português"
         else -> selectedLanguage
     }
 
@@ -139,6 +163,7 @@ fun LanguageDropdown(
             val langName = when (lang) {
                 "es" -> "Español"
                 "en" -> "English"
+                "pt" -> "Português"
                 else -> lang
             }
             DropdownMenuItem(

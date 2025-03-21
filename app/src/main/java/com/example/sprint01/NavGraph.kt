@@ -21,7 +21,7 @@ import com.example.sprint01.ui.view.TripDetailsScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = "home") {
         composable ("login") { LoginScreen(navController) }
         composable ("home") { HomeScreen(navController) }
         composable ("profile") { ProfileScreen(navController) }
