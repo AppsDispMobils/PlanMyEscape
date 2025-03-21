@@ -1,5 +1,6 @@
 package com.example.sprint01.ui.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,11 +23,13 @@ class ProgrammedTripsViewModel @Inject constructor(
     private fun loadTrips() {
         trips.clear()
         trips.addAll(tripRepository.getTrips())
+        Log.d("Trip", "Showing all trips")
     }
 
     fun addTrip(trip: Trip) {
         viewModelScope.launch {
             tripRepository.addTrip(trip)
+            Log.d("Trip", "Added new trip: ${trip.destination}")
             loadTrips()
         }
     }
@@ -34,6 +37,7 @@ class ProgrammedTripsViewModel @Inject constructor(
     fun deleteTrip(tripId: Int) {
         viewModelScope.launch {
             tripRepository.deleteTrip(tripId)
+            Log.d("Trip", "Deleting trip...")
             loadTrips()
         }
     }
@@ -41,6 +45,7 @@ class ProgrammedTripsViewModel @Inject constructor(
     fun updateTrip(trip: Trip) {
         viewModelScope.launch {
             tripRepository.updateTrip(trip)
+            Log.d("Trip", "Updated ${trip.destination}")
             loadTrips()
         }
     }
