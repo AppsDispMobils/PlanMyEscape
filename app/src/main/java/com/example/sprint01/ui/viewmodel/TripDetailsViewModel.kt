@@ -1,5 +1,7 @@
 package com.example.sprint01.ui.viewmodel
 
+import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,24 +13,28 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class TripDetailsViewModel @Inject constructor(
-    val repository: TripRepository = TripRepositoryImpl(),
+    private val repository: TripRepository = TripRepositoryImpl(),
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     val tripId: Int = savedStateHandle["tripId"] ?: 0
 
-    private val _itineraryItems = mutableListOf<ItineraryItem>()
-    public val itineraryItems = _itineraryItems
+    private val _itineraryItems = mutableStateListOf<ItineraryItem>()
+    val itineraryItems = _itineraryItems
 
     init {
         loadItineraryItems()
     }
 
     private fun loadItineraryItems() {
-        _itineraryItems.clear()
-        _itineraryItems.addAll(repository.getItineraryItemsfromTrip(tripId))
+        Log.d("Itinerary","Cargando elementos de la lista: $itineraryItems")
+        itineraryItems.clear()
+        Log.d("Itinerary","Limpiar elementos de la lista: $itineraryItems")
+        itineraryItems.addAll(repository.getItineraryItemsfromTrip(tripId))
+        Log.d("Itinerary", "Mostrado en pantalla: $itineraryItems")
     }
 
     fun addItitneraryItem(itineraryItem: ItineraryItem) {
@@ -46,8 +52,9 @@ class TripDetailsViewModel @Inject constructor(
     }
 
     fun deleteItineraryItem(itineraryItemId: Int) {
-        viewModelScope.launch {
+
             repository.deleteItineraryItem(itineraryItemId)
-        }
+            loadItineraryItems()
+
     }
 }
