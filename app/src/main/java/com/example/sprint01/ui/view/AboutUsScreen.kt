@@ -63,7 +63,7 @@ fun AboutUsScreen(navController: NavHostController) {
         Button(
             onClick = {
                 Log.d("AboutUsScreen", "Back button clicked") // Log cuando el usuario hace clic en el botón
-                navController.navigate("settings")
+                navController.popBackStack()
             },
             modifier = Modifier.fillMaxWidth()
         ) {

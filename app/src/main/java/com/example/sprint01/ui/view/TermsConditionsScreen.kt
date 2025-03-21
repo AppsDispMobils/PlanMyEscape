@@ -74,11 +74,11 @@ fun TermsConditionsScreen(navController: NavHostController)  {
 
         // Un botón back homeScreen
         Button(
-            onClick = { navController.navigate("settings")},
+            onClick = { navController.popBackStack()},
             modifier = Modifier.fillMaxWidth()
 
         ) {
-            Text(text = "Go Back")
+            Text(stringResource(id = R.string.about_usBoton))
         }
 
     }
