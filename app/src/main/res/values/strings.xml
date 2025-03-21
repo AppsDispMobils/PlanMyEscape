@@ -7,10 +7,10 @@
     <string name="about_us">Sobre Nosotros</string>
 
     <!-- División de las cadenas largas -->
-    <string name="about_us1_part1">Destinify es una aplicación desarollada por dos estudiantes de UDL Igualada,</string>
+    <string name="about_us1_part1">Plan My Escape es una aplicación desarollada por dos estudiantes de UDL Igualada,</string>
     <string name="about_us1_part2">que esta en fase Beta,  que te permite planificar y gestionar tus viajes de forma sencilla y rápida.</string>
 
-    <string name="about_us2_part1">Desarrollada por el equipo de Destinify. Todos los derechos estan reservados,</string>
+    <string name="about_us2_part1">Desarrollada por el equipo de Plan My Escape. Todos los derechos estan reservados,</string>
     <string name="about_us2_part2">y no tenemos problema en usar la justicia.</string>
 
     <string name="about_usBoton">Volver</string>

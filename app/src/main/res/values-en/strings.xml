@@ -7,10 +7,10 @@
     <string name="about_us">About Us</string>
 
     <!-- Division of long strings -->
-    <string name="about_us1_part1">Destinify is an application developed by two students from UDL Igualada,</string>
+    <string name="about_us1_part1">Plan My Escape is an application developed by two students from UDL Igualada,</string>
     <string name="about_us1_part2">which is currently in the Beta phase, allowing you to easily and quickly plan and manage your trips.</string>
 
-    <string name="about_us2_part1">Developed by the Destinify team. All rights reserved,</string>
+    <string name="about_us2_part1">Developed by the Plan My Escape team. All rights reserved,</string>
     <string name="about_us2_part2">and we have no issue using the law.</string>
 
     <string name="about_usBoton">Go Back</string>
