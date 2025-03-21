@@ -20,23 +20,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sprint01.R
-import com.example.sprint01.R.color.icon_color
+import com.example.sprint01.R.color.app_color
 import com.example.sprint01.domain.model.Trip
-import com.example.sprint01.ui.screens.BottomNavigationBar
 import com.example.sprint01.ui.viewmodel.ProgrammedTripsViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProgrammedTripsScreen(
     navController: NavController,
@@ -62,18 +64,9 @@ fun ProgrammedTripsScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Viajes Programados") },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        navController.popBackStack()
-                    }) {
-                        Icon(
-                            Icons.Default.ArrowBack,
-                            contentDescription = "Volver a viajes"
-                        )
-                    }
-                }
+            TopNavigationBar(
+                navController = navController,
+                title = "Viajes Programados"
             )
         },
         floatingActionButton = {
@@ -275,6 +268,46 @@ fun isValidDate(date: String): Boolean {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopNavigationBar(
+    navController: NavController,
+    title: String
+) {
+    val appColor = colorResource(id = R.color.app_color)
+    TopAppBar(
+        title = {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = title,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.DarkGray,
+                    textAlign = TextAlign.Center
+                )
+            }
+        },
+        navigationIcon = {
+            IconButton(onClick = {
+                navController.popBackStack()
+            }) {
+                Icon(
+                    Icons.Default.ArrowBack,
+                    tint = Color.Gray,
+                    contentDescription = "Volver a viajes"
+                )
+            }
+        },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = appColor,
+            titleContentColor = Color.White // Color del texto del título
+        )
+    )
+}
+
 
 @Composable
 fun TripCard(
@@ -286,7 +319,7 @@ fun TripCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .background(color = colorResource(icon_color), shape = RoundedCornerShape(8.dp))
+            .background(color = colorResource(app_color), shape = RoundedCornerShape(8.dp))
             .border(1.dp, Color.Gray, shape = RoundedCornerShape(8.dp))
             .clickable { onOpen() }
     ) {

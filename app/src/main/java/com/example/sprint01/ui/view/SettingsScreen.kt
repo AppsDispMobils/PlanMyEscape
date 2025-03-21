@@ -1,4 +1,4 @@
-package com.example.sprint01.ui.screens
+package com.example.sprint01.ui.view
 
 import android.content.Context
 import android.content.Intent
@@ -33,17 +33,9 @@ fun SettingsScreen(navController: NavHostController) {
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Text(text = stringResource(id = R.string.settings), modifier = Modifier.fillMaxWidth(),
-                            fontSize = 24.sp, textAlign = TextAlign.Center)
-                    }
-                }
+            TopNavigationBar(
+                navController = navController,
+                title = "Configuración"
             )
         },
         bottomBar = {
@@ -64,9 +56,9 @@ fun SettingsScreen(navController: NavHostController) {
                 // 🔹 Texto "Settings" centrado
 
 
-                Spacer(modifier = Modifier.height(10.dp))
-                HorizontalDivider()
                 Spacer(modifier = Modifier.height(20.dp))
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(30.dp))
 
                 // Opción para cambiar el color de fondo
                 Text(

@@ -3,6 +3,7 @@
     <string name="app_name">Sprint01</string>
     <string name="username">user</string>
     <string name="password">123</string>
+    <string name="title">Plan My Escape</string>
     <string name="about_us">Sobre Nosotros</string>
     <string name="about_us1">Destinify es una aplicación desarollada por dos estudiantes de UDL Igualada, que esta en fase Beta,  que te permite planificar y gestionar tus viajes de forma sencilla y rápida.</string>
     <string name="about_us2">Desarrollada por el equipo de Destinify. Todos los derechos estan reservados, y no tenemos problema en usar la justicia.</string>

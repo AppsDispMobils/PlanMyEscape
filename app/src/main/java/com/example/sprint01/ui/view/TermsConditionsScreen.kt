@@ -1,4 +1,4 @@
-package com.example.sprint01.ui.screens
+package com.example.sprint01.ui.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,14 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import com.example.sprint01.R
-import org.w3c.dom.Text
+
 @Composable
 fun TermsConditionsScreen(navController: NavHostController)  {
     Column (
@@ -65,7 +62,7 @@ fun TermsConditionsScreen(navController: NavHostController)  {
 
         // Un botón back homeScreen
         Button(
-            onClick = { navController.navigate("home")},
+            onClick = { navController.navigate("settings")},
             modifier = Modifier.fillMaxWidth()
 
         ) {
