@@ -3,6 +3,7 @@
     <string name="app_name">Sprint01</string>
     <string name="username">user</string>
     <string name="password">123</string>
+    <string name="title">Plan My Escape</string>
     <string name="about_us">Sobre Nosotros</string>
 
     <!-- División de las cadenas largas -->

@@ -5,7 +5,7 @@
         <item name="android:windowSplashScreenAnimatedIcon">@null</item>
         <!-- Set splash screen background color, drawable, etc. -->
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowSplashScreenBackground">@color/icon_color</item>
+        <item name="android:windowSplashScreenBackground">@color/app_color</item>
 
 
         <!-- Optionally make status bar transparent or a custom color -->

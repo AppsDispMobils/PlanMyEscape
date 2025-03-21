@@ -29,9 +29,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.sprint01.R.color.icon_color
+import com.example.sprint01.R.color.app_color
 import com.example.sprint01.domain.model.ItineraryItem
-import com.example.sprint01.ui.screens.BottomNavigationBar
 import com.example.sprint01.ui.viewmodel.TripDetailsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,18 +57,9 @@ fun TripDetailsScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Trip Details") },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        navController.popBackStack()
-                    }) {
-                        Icon(
-                            Icons.Default.ArrowBack,
-                            contentDescription = "Volver a viajes"
-                        )
-                    }
-                }
+            TopNavigationBar(
+                navController = navController,
+                title = "Detalles de Viaje"
             )
         },
         floatingActionButton = {
@@ -229,7 +219,7 @@ fun ItineraryItemCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .background(color = colorResource(icon_color), shape = RoundedCornerShape(8.dp))
+            .background(color = colorResource(app_color), shape = RoundedCornerShape(8.dp))
             .border(1.dp, Color.Gray, shape = RoundedCornerShape(8.dp))
     ) {
         Column(
