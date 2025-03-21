@@ -1,5 +1,6 @@
 package com.example.sprint01.ui.view
 
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,7 +26,6 @@ import androidx.navigation.NavController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.example.sprint01.R
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,7 +58,10 @@ fun HomeScreen(navController: NavController) {
                 ),
                 actions = {
                     IconButton(
-                        onClick = { navController.navigate("settings") }
+                        onClick = {
+                            Log.d("HomeScreen", "Navigating to settings screen")
+                            navController.navigate("settings")
+                        }
                     ) {
                         Icon(
                             Icons.Outlined.Settings,
@@ -93,45 +96,51 @@ fun HomeScreen(navController: NavController) {
                         .padding(horizontal = 16.dp, vertical = 24.dp)
                         .border(2.dp, appColor, RoundedCornerShape(24.dp)) // Borde naranja pastel
                         .background(appColor.copy(alpha = 0.2f)), // Fondo semitransparente
-                            onClick = { navController.navigate("programmedTrips") }
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Center
-                            ) {
-                                Text(
-                                    text = stringResource(id = R.string.ProgrammedTrips),
-                                    fontSize = 18.sp,
-                                    fontWeight = FontWeight.Medium,
-                                    color = Color.Gray
-                                )
-                            }
-                        }
+                    onClick = {
+                        Log.d("HomeScreen", "Navigating to programmed trips screen")
+                        navController.navigate("programmedTrips")
+                    }
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.ProgrammedTrips),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                    }
+                }
 
-                            // Botón "Plan New Trip"
-                            IconButton(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .weight(0.5f)
-                                    .padding(horizontal = 16.dp, vertical = 24.dp)
-                                    .border(2.dp, appColor, RoundedCornerShape(24.dp))
-                                    .background(appColor.copy(alpha = 0.2f)),
-                                onClick = { navController.navigate("planNewTrip") }
-                            ) {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.Center
-                                ) {
-                                    Text(
-                                        text = stringResource(id = R.string.Plan_New_Trip),
-                                        fontSize = 18.sp,
-                                        fontWeight = FontWeight.Medium,
-                                        color = Color.Gray
-                                    )
-                                }
-                            }
+                // Botón "Plan New Trip"
+                IconButton(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(0.5f)
+                        .padding(horizontal = 16.dp, vertical = 24.dp)
+                        .border(2.dp, appColor, RoundedCornerShape(24.dp))
+                        .background(appColor.copy(alpha = 0.2f)),
+                    onClick = {
+                        Log.d("HomeScreen", "Navigating to plan new trip screen")
+                        navController.navigate("planNewTrip")
+                    }
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.Plan_New_Trip),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.Gray
+                        )
+                    }
+                }
             }
         }
     )
@@ -160,7 +169,10 @@ fun BottomNavigationBar(
                 )
             },
             selected = selectedIndex == 0,
-            onClick = { navController.navigate("profile") }
+            onClick = {
+                Log.d("BottomNavigation", "Navigating to profile screen")
+                navController.navigate("profile")
+            }
         )
 
         NavigationBarItem(
@@ -178,9 +190,10 @@ fun BottomNavigationBar(
                 )
             },
             selected = selectedIndex == 1,
-            onClick = { navController.navigate("home") }
+            onClick = {
+                Log.d("BottomNavigation", "Navigating to home screen")
+                navController.navigate("home")
+            }
         )
     }
 }
-
-
