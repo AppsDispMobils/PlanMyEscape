@@ -20,7 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -66,7 +65,7 @@ fun ProgrammedTripsScreen(
         topBar = {
             TopNavigationBar(
                 navController = navController,
-                title = "Viajes Programados"
+                title = stringResource(id = R.string.ProgrammedTrips)
             )
         },
         floatingActionButton = {
@@ -205,12 +204,12 @@ fun ProgrammedTripsScreen(
                         }
                     }
                 ) {
-                    Text(stringResource(id = R.string.boton_addTrip1))
+                    Text(stringResource(id = R.string.botonGuardar))
                 }
             },
             dismissButton = {
                 Button(onClick = { showTripDialog = false }) {
-                    Text(stringResource(id = R.string.boton_addTrip2))
+                    Text(stringResource(id = R.string.botonCancelar))
                 }
             }
         )

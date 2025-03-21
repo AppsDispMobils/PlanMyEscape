@@ -26,9 +26,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.sprint01.R
 import com.example.sprint01.R.color.app_color
 import com.example.sprint01.domain.model.ItineraryItem
 import com.example.sprint01.ui.viewmodel.TripDetailsViewModel
@@ -59,7 +61,7 @@ fun TripDetailsScreen(
         topBar = {
             TopNavigationBar(
                 navController = navController,
-                title = "Detalles de Viaje"
+                title = stringResource(id = R.string.TripDetails)
             )
         },
         floatingActionButton = {
@@ -120,13 +122,13 @@ fun TripDetailsScreen(
     if(showItineraryItemDialog) {
         AlertDialog(
             onDismissRequest = { showItineraryItemDialog = false },
-            title = { Text(text = if (isEditingItineraryItem) "Editar Itinerario" else "Añadir Itinerario") },
+            title = { Text(text = if (isEditingItineraryItem) stringResource(id = R.string.updt_itnry) else stringResource(id = R.string.add_itnry)) },
             text = {
                 Column {
                     OutlinedTextField(
                         value = itineraryItemTitle,
                         onValueChange = { itineraryItemTitle = it },
-                        label = { Text("Titulo") },
+                        label = { Text(stringResource(id = R.string.itnry_Card1)) },
                         modifier = Modifier.fillMaxWidth(),
                         isError = fieldError != null,
                         supportingText = {
@@ -138,7 +140,7 @@ fun TripDetailsScreen(
                     OutlinedTextField(
                         value = description,
                         onValueChange = { description = it },
-                        label = { Text("Descripción") },
+                        label = { Text(stringResource(id = R.string.itnry_Card2)) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 8.dp),
@@ -152,7 +154,7 @@ fun TripDetailsScreen(
                     OutlinedTextField(
                         value = date,
                         onValueChange = { date = it },
-                        label = { Text("Fecha") },
+                        label = { Text(stringResource(id = R.string.itnry_Card3 ) + " (dd-MM-yyyy)") },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 8.dp),
@@ -196,12 +198,12 @@ fun TripDetailsScreen(
                         }
                     }
                 ) {
-                    Text("Guardar")
+                    Text(stringResource(R.string.botonGuardar))
                 }
             },
             dismissButton = {
                 Button(onClick = { showItineraryItemDialog = false }) {
-                    Text("Cancelar")
+                    Text(stringResource(id = R.string.botonCancelar))
                 }
             }
         )
@@ -225,9 +227,9 @@ fun ItineraryItemCard(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(text = "Titulo: ${itineraryItem.title}", style = MaterialTheme.typography.titleMedium)
-            Text(text = "Descripción: ${itineraryItem.description}", style = MaterialTheme.typography.bodyMedium)
-            Text(text = "Fecha: ${itineraryItem.date}", style = MaterialTheme.typography.bodyMedium)
+            Text(text = stringResource(id = R.string.itnry_Card1) + ": ${itineraryItem.title}", style = MaterialTheme.typography.titleMedium)
+            Text(text = stringResource(id = R.string.itnry_Card2) + ": ${itineraryItem.description}", style = MaterialTheme.typography.bodyMedium)
+            Text(text = stringResource(id = R.string.itnry_Card3) + ": ${itineraryItem.date}", style = MaterialTheme.typography.bodyMedium)
             Row {
                 IconButton(onEdit) {
                     Icon(

@@ -25,7 +25,6 @@ import androidx.navigation.NavHostController
 import com.example.sprint01.R
 import com.example.sprint01.ui.view.BottomNavigationBar
 import com.example.sprint01.ui.viewmodel.SettingsViewModel
-import java.util.Locale
 import android.util.Log
 
 
@@ -46,17 +45,9 @@ fun SettingsScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Text(text = stringResource(id = R.string.settings), modifier = Modifier.fillMaxWidth(),
-                            fontSize = 24.sp, textAlign = TextAlign.Center)
-                    }
-                }
+            TopNavigationBar(
+                navController = navController,
+                title = stringResource(id = R.string.settings)
             )
         },
         bottomBar = {
