@@ -32,6 +32,10 @@ fun LoginScreen(navController: NavController) {
     var password by remember { mutableStateOf("") }
     var showAlert by remember { mutableStateOf(false) }
 
+    var showError by remember { mutableStateOf(false) }
+    var usernameError by remember {mutableStateOf(false)}
+    var passwordError by remember {mutableStateOf(false)}
+
     val defaultUser = stringResource(id = R.string.username)
     val defaultPass = stringResource(id = R.string.password)
 
@@ -46,7 +50,7 @@ fun LoginScreen(navController: NavController) {
     ) {
         // Título
         Text(
-            text = "Login Screen",
+            text = stringResource(id = R.string.Login_Screen),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold,
             color = Color.DarkGray
@@ -58,7 +62,7 @@ fun LoginScreen(navController: NavController) {
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            label = { Text("Username", color = Color.DarkGray) },
+            label = { Text(stringResource(id=R.string.UsernameText), color = Color.DarkGray) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Person,
@@ -69,11 +73,20 @@ fun LoginScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth(),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = appColor,
-                unfocusedBorderColor = Color.Gray,
+                unfocusedBorderColor = if (usernameError) Color.Red else Color.Gray,
                 cursorColor = appColor,
                 focusedTextColor = Color.DarkGray
-            )
+            ),
+            isError = usernameError
         )
+        if (usernameError) {
+            Text(
+                text = stringResource(id=R.string.UsernameText1),
+                color = Color.Red,
+                fontSize = 12.sp
+            )
+        }
+
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -81,7 +94,7 @@ fun LoginScreen(navController: NavController) {
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Password", color = Color.DarkGray) },
+            label = { Text(stringResource(id = R.string.PasswordText), color = Color.DarkGray) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
@@ -93,19 +106,31 @@ fun LoginScreen(navController: NavController) {
             visualTransformation = PasswordVisualTransformation(),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = appColor,
-                unfocusedBorderColor = Color.Gray,
+                unfocusedBorderColor = if (passwordError) Color.Red else Color.Gray,
                 cursorColor = appColor,
                 focusedTextColor = Color.DarkGray
-            )
+            ),
+            isError = passwordError
         )
+        if (passwordError) {
+            Text(
+                text = stringResource(id = R.string.PasswordText1),
+                color = Color.Red,
+                fontSize = 12.sp
+            )
+        }
 
         Spacer(modifier = Modifier.height(40.dp))
 
         // Botón de inicio de sesión
         Button(
             onClick = {
-                if ((username == defaultUser) && (password == defaultPass)) { // Cambia esto por tu lógica de autenticación
+                if (username == defaultUser && password == defaultPass) {
                     navController.navigate("home")
+                } else {
+                    showError = true
+                    usernameError = username != defaultUser
+                    passwordError = password != defaultPass
                 }
             },
             modifier = Modifier
@@ -117,47 +142,22 @@ fun LoginScreen(navController: NavController) {
             ),
             shape = RoundedCornerShape(12.dp) // Bordes redondeados
         ) {
-            Text(text = "Login", fontSize = 16.sp, color = Color.Gray)
+            Text(text = stringResource(id = R.string.Login_Text), fontSize = 16.sp, color = Color.Gray)
         }
+// Mostrar alerta si hay un error
+        if (showError) {
+            AlertDialog(
+                onDismissRequest = { showError = false },
+                confirmButton = {
+                    TextButton(onClick = { showError = false }) {
+                        Text("OK")
+                    }
+                },
+                title = { Text(stringResource(id = R.string.Login_Error)) },
+                text = { Text(stringResource(id = R.string.Login_Error1)) }
+            )
+        }
+
+
     }
-
-    /*Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-
-    ){
-        Text(text = "Login Screen")
-        Spacer(modifier = Modifier.height(20.dp))
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = { Text("Username") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(10.dp))
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text("Password") },
-            modifier = Modifier.fillMaxWidth(),
-            visualTransformation = PasswordVisualTransformation()
-        )
-        Spacer(modifier = Modifier.height(40.dp))
-        Button(
-            onClick = {
-                if((username == defaultUser) && (password == defaultPass)) {
-                    navController.navigate("home")
-                }
-            }
-        ) {
-            Text(text = "Login")
-        }
-
-    }*/
-
-
-
 }

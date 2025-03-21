@@ -49,4 +49,14 @@
     <string name="Profile">Perfil</string>
     <string name="Home">Inicio App</string>
     <string name="Dark_Theme">Tema Oscuro</string>
+
+    <string name="Login_Screen">Escena Login</string>
+    <string name="UsernameText">Usuario</string>PasswordText
+    <string name="UsernameText1">Usuario Incorrecto</string>
+    <string name="PasswordText">Contraseña</string>
+    <string name="PasswordText1">Contraseña Incorrecta</string>
+
+    <string name="Login_Text">Iniciar Sesion</string>
+    <string name="Login_Error">Error Iniciar Sesion</string>
+    <string name="Login_Error1">Incorrect username or password. Please try again.</string>
 </resources>
