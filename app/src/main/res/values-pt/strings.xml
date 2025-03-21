@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sprint01</string>
-    <string name="username">usuário</string>
+    <string name="username">user</string>
     <string name="password">123</string>
+    <string name="title">Planejar Minha Fuga</string>
     <string name="about_us">Sobre Nós</string>
 
     <!-- Divisão de strings longas -->
     <string name="about_us1_part1">Destinify é um aplicativo desenvolvido por dois estudantes da UDL Igualada,</string>
-    <string name="about_us1_part2">atualmente na fase Beta, permitindo que você planeje e gerencie suas viagens de forma fácil e rápida.</string>
+    <string name="about_us1_part2">que está atualmente na fase Beta, permitindo que você planeje e gerencie suas viagens de forma fácil e rápida.</string>
 
     <string name="about_us2_part1">Desenvolvido pela equipe Destinify. Todos os direitos reservados,</string>
-    <string name="about_us2_part2">e não temos problema em fazer cumprir a lei.</string>
+    <string name="about_us2_part2">e não temos problemas em recorrer à justiça.</string>
 
     <string name="about_usBoton">Voltar</string>
     <string name="version1">Informações do Aplicativo</string>
     <string name="version2">Versão</string>
     <string name="terms_and_condi">Termos e Condições</string>
 
-    <!-- Divisão de strings longas dos termos -->
+    <!-- Divisão das strings longas dos termos -->
     <string name="terms_and_condi0_part1">Bem-vindo ao Destinify. Ao acessar e usar nosso aplicativo, você concorda em cumprir os seguintes termos e condições.</string>
-    <string name="terms_and_condi0_part2">Se você não concorda com estes termos, pedimos que não use nosso aplicativo.</string>
+    <string name="terms_and_condi0_part2">Se você não concordar com estes termos, pedimos que não use nosso aplicativo.</string>
 
-    <string name="terms_and_condi1_part1">1. Uso do Aplicativo\nO aplicativo Destinify permite que você planeje e gerencie viagens.</string>
+    <string name="terms_and_condi1_part1">1. Uso do Aplicativo\nO aplicativo Destinify permite planejar e gerenciar viagens.</string>
     <string name="terms_and_condi1_part2">Você concorda em usar este aplicativo apenas para fins legais e de acordo com estes Termos e Condições.</string>
-    <string name="terms_and_condi1_part3">O uso do aplicativo para atividades ilegais ou não autorizadas é proibido.</string>
+    <string name="terms_and_condi1_part3">É proibido o uso do aplicativo para atividades ilegais ou não autorizadas.</string>
 
-    <string name="terms_and_condi2_part1">2. Encerramento\nO Destinify reserva-se o direito de suspender ou cancelar sua conta a qualquer momento e sem aviso prévio</string>
-    <string name="terms_and_condi2_part2">se for detectado o uso indevido do aplicativo ou violação destes termos.</string>
+    <string name="terms_and_condi2_part1">2. Rescisão\nO Destinify reserva-se o direito de suspender ou cancelar sua conta a qualquer momento e sem aviso prévio</string>
+    <string name="terms_and_condi2_part2">se for detectado uso indevido do aplicativo ou violação destes termos.</string>
 
     <string name="terms_and_condi3_part1">3. Lei Aplicável\nEstes Termos e Condições serão regidos e interpretados de acordo com as leis da Espanha,</string>
-    <string name="terms_and_condi3_part2">sem considerar suas disposições sobre conflito de leis.</string>
-    <string name="terms_and_condi3_part3">Qualquer disputa decorrente destes termos será resolvida nos tribunais competentes do Tribunal Superior de Justiça da Catalunha.</string>
+    <string name="terms_and_condi3_part2">sem levar em consideração suas disposições sobre conflitos de leis.</string>
+    <string name="terms_and_condi3_part3">Quaisquer disputas decorrentes destes termos serão resolvidas nos tribunais competentes do Tribunal Superior de Justiça da Catalunha.</string>
 
     <string name="settings">Configurações</string>
     <string name="change_password">Alterar Senha</string>
     <string name="volver">Voltar</string>
-    <string name="change_background">Alterar Plano de Fundo</string>
+    <string name="change_background">Alterar Fundo</string>
     <string name="trip_Card1">Destino</string>
     <string name="trip_Card2">Data de Início</string>
     <string name="trip_Card3">Data de Término</string>
@@ -46,5 +47,16 @@
     <string name="ProgrammedTrips">Viagens Programadas</string>
     <string name="Plan_New_Trip">Planejar Nova Viagem</string>
     <string name="Profile">Perfil</string>
+    <string name="Home">Início</string>
     <string name="Dark_Theme">Tema Escuro</string>
+
+    <string name="Login_Screen">Tela de Login</string>
+    <string name="UsernameText">Usuário</string>
+    <string name="UsernameText1">Usuário Incorreto</string>
+    <string name="PasswordText">Senha</string>
+    <string name="PasswordText1">Senha Incorreta</string>
+
+    <string name="Login_Text">Entrar</string>
+    <string name="Login_Error">Erro de Login</string>
+    <string name="Login_Error1">Usuário ou senha incorretos. Por favor, tente novamente.</string>
 </resources>
