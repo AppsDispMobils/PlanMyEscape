@@ -39,25 +39,37 @@ fun TermsConditionsScreen(navController: NavHostController)  {
         HorizontalDivider()
         Spacer(modifier = Modifier.height(20.dp))
         //Terminos y condiciones
-        Text(
-            text = stringResource(id = (R.string.terms_and_condi0_part1 + R.string.terms_and_condi0_part2)),
-            style = TextStyle(fontSize = 18.sp, color = Color.Gray)
-        )
+
+            Text(
+                text = stringResource(id = R.string.terms_and_condi0_part1) + " " + stringResource(id = R.string.terms_and_condi0_part2),
+                style = TextStyle(fontSize = 18.sp, color = Color.Gray)
+            )
+
+
         Spacer(modifier = Modifier.height(40.dp))
-        Text(
-            text = stringResource(id = (R.string.terms_and_condi1_part1 + R.string.terms_and_condi1_part2)),
-            style = TextStyle(fontSize = 18.sp, color = Color.Gray)
-        )
+
+            Text(
+                text = stringResource(id = R.string.terms_and_condi1_part1) + " " + stringResource(id = R.string.terms_and_condi1_part2),
+                style = TextStyle(fontSize = 18.sp, color = Color.Gray)
+            )
+
+
         Spacer(modifier = Modifier.height(40.dp))
-        Text(
-            text = stringResource(id = (R.string.terms_and_condi2_part1 + R.string.terms_and_condi2_part2)),
-            style = TextStyle(fontSize = 18.sp, color = Color.Gray)
-        )
+
+            Text(
+                text = stringResource(id = R.string.terms_and_condi2_part1) + " " + stringResource(id = R.string.terms_and_condi2_part2),
+                style = TextStyle(fontSize = 18.sp, color = Color.Gray)
+            )
+
+
         Spacer(modifier = Modifier.height(20.dp))
-        Text(
-            text = stringResource(id = (R.string.terms_and_condi3_part1 + R.string.terms_and_condi3_part2)),
-            style = TextStyle(fontSize = 18.sp, color = Color.Gray)
-        )
+
+            Text(
+                text = stringResource(id = R.string.terms_and_condi3_part1) + " " + stringResource(id = R.string.terms_and_condi3_part2),
+                style = TextStyle(fontSize = 18.sp, color = Color.Gray)
+            )
+
+
         Spacer(modifier = Modifier.height(40.dp))
 
         // Un botón back homeScreen

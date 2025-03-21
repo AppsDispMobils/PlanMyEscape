@@ -34,14 +34,14 @@ fun AboutUsScreen(navController: NavHostController) {
 
         // Descripción de la app
         Text(
-            text = stringResource(id = (R.string.about_us1_part1+R.string.about_us1_part2)),
+            text = stringResource(id = R.string.about_us1_part1) + " " + stringResource(id = R.string.about_us1_part2),
             style = TextStyle(fontSize = 18.sp, color = Color.Gray)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = stringResource(id = (R.string.about_us2_part1+R.string.about_us2_part2)),
+            text = stringResource(id = R.string.about_us2_part1) + " " + stringResource(id = R.string.about_us2_part2),
             style = TextStyle(fontSize = 14.sp, color = Color.Gray)
         )
 
