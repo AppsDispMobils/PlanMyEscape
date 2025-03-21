@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sprint01</string>
+    <string name="username">user</string>
+    <string name="password">123</string>
+    <string name="about_us">About Us</string>
+
+    <!-- Division of long strings -->
+    <string name="about_us1_part1">Destinify is an application developed by two students from UDL Igualada,</string>
+    <string name="about_us1_part2">which is currently in the Beta phase, allowing you to easily and quickly plan and manage your trips.</string>
+
+    <string name="about_us2_part1">Developed by the Destinify team. All rights reserved,</string>
+    <string name="about_us2_part2">and we have no issue using the law.</string>
+
+    <string name="about_usBoton">Go Back</string>
+    <string name="version1">Application Information</string>
+    <string name="version2">Version</string>
+    <string name="terms_and_condi">Terms and Conditions</string>
+
+    <!-- Division of long terms strings -->
+    <string name="terms_and_condi0_part1">Welcome to Destinify. By accessing and using our app, you agree to comply with the following terms and conditions.</string>
+    <string name="terms_and_condi0_part2">If you do not agree with these terms, we ask that you do not use our app.</string>
+
+    <string name="terms_and_condi1_part1">1. Use of the Application\nThe Destinify app allows you to plan and manage trips.</string>
+    <string name="terms_and_condi1_part2">You agree to use this application only for legal purposes and in accordance with these Terms and Conditions.</string>
+    <string name="terms_and_condi1_part3">The use of the app for illegal or unauthorized activities is prohibited.</string>
+
+    <string name="terms_and_condi2_part1">2. Termination\nDestinify reserves the right to suspend or cancel your account at any time and without prior notice</string>
+    <string name="terms_and_condi2_part2">if misuse of the app is detected or if you violate these terms.</string>
+
+    <string name="terms_and_condi3_part1">3. Governing Law\nThese Terms and Conditions will be governed and interpreted in accordance with the laws of Spain,</string>
+    <string name="terms_and_condi3_part2">without regard to its conflict of laws provisions.</string>
+    <string name="terms_and_condi3_part3">Any disputes arising from these terms will be resolved in the competent courts of the Superior Court of Justice of Catalonia.</string>
+
+    <string name="settings">Settings</string>
+    <string name="change_password">Change Password</string>
+    <string name="volver">Go Back</string>
+    <string name="change_background">Change Background</string>
+    <string name="trip_Card1">Destination</string>
+    <string name="trip_Card2">Start Date</string>
+    <string name="trip_Card3">End Date</string>
+    <string name="boton_addTrip1">Save</string>
+    <string name="boton_addTrip2">Cancel</string>
+    <string name="add_trip">Add Trip</string>
+    <string name="updt_trip">Edit Trip</string>
+
+</resources>
