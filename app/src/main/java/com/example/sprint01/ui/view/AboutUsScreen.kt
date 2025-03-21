@@ -1,5 +1,6 @@
 package com.example.sprint01.ui.view
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -60,9 +61,11 @@ fun AboutUsScreen(navController: NavHostController) {
 
         // Un botón back homeScreen
         Button(
-            onClick = { navController.navigate("settings")},
+            onClick = {
+                Log.d("AboutUsScreen", "Back button clicked") // Log cuando el usuario hace clic en el botón
+                navController.navigate("settings")
+            },
             modifier = Modifier.fillMaxWidth()
-
         ) {
             Text(text = stringResource(id = R.string.about_usBoton))
         }

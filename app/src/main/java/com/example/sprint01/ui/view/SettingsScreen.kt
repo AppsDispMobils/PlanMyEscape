@@ -26,6 +26,7 @@ import com.example.sprint01.R
 import com.example.sprint01.ui.view.BottomNavigationBar
 import com.example.sprint01.ui.viewmodel.SettingsViewModel
 import java.util.Locale
+import android.util.Log
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,6 +41,8 @@ fun SettingsScreen(
     // Configuración de idioma
     val language = viewModel.language // Obtenemos el idioma desde el ViewModel
     val isDarkTheme = viewModel.isDarkTheme
+
+    Log.d("SettingsScreen", "Idioma actual: $language, Tema oscuro: $isDarkTheme")
 
     Scaffold(
         topBar = {
@@ -78,7 +81,9 @@ fun SettingsScreen(
                     text = stringResource(id = R.string.change_password),
                     fontSize = 18.sp,
                     modifier = Modifier
-                        .clickable { /* TODO: Implementar */ }
+                        .clickable {
+                            Log.d("SettingsScreen", "Opción de cambiar contraseña seleccionada.")
+                            /* TODO: Implementar */ }
                         .fillMaxWidth()
                         .padding(10.dp)
                 )
@@ -88,7 +93,9 @@ fun SettingsScreen(
                     text = stringResource(id = R.string.about_us),
                     fontSize = 18.sp,
                     modifier = Modifier
-                        .clickable {navController.navigate("aboutUs") }
+                        .clickable {
+                            Log.d("SettingsScreen", "Navegar a Sobre Nosotros")
+                            navController.navigate("aboutUs") }
                         .fillMaxWidth()
                         .padding(10.dp)
 
@@ -98,7 +105,9 @@ fun SettingsScreen(
                     text = stringResource(id = R.string.terms_and_condi),
                     fontSize = 18.sp,
                     modifier = Modifier
-                        .clickable {navController.navigate("termsConditions") }
+                        .clickable {
+                            Log.d("SettingsScreen", "Navegar a Términos y Condiciones")
+                            navController.navigate("termsConditions") }
                         .fillMaxWidth()
                         .padding(10.dp)
 
@@ -106,7 +115,9 @@ fun SettingsScreen(
                 // Cambiar idioma
                 LanguageDropdown(
                     selectedLanguage = language,
-                    onLanguageSelected = { newLang -> viewModel.updateLanguage(newLang) },
+                    onLanguageSelected = { newLang ->
+                        Log.d("SettingsScreen", "Idioma seleccionado: $newLang")
+                        viewModel.updateLanguage(newLang) },
                     availableLanguages = listOf("en", "es","pt")
                 )
                 Row(
@@ -116,7 +127,9 @@ fun SettingsScreen(
                     Text(stringResource(id = R.string.Dark_Theme))
                     Switch(
                         checked = isDarkTheme as Boolean,
-                        onCheckedChange = {viewModel.updateDarkTheme(it)}
+                        onCheckedChange = {
+                            Log.d("SettingsScreen", "Tema oscuro cambiado")
+                            viewModel.updateDarkTheme(it)}
                     )
                 }
 
@@ -169,6 +182,7 @@ fun LanguageDropdown(
             DropdownMenuItem(
                 text = { Text(langName) },
                 onClick = {
+                    Log.d("SettingsScreen", "Idioma seleccionado en el dropdown: $lang")
                     onLanguageSelected(lang) // Llamamos a la función para seleccionar el idioma
                     expanded = false
                 }
