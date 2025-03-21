@@ -16,7 +16,7 @@ class ProgrammedTripsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _trips = mutableStateListOf<Trip>()
-    public val trips = _trips
+    val trips = _trips
 
 
     private fun loadTrips() {
