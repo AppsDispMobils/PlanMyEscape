@@ -40,6 +40,7 @@ class TripRepositoryImpl @Inject constructor(
         TripDao.addTrip(tripEntity)
     }
 
+
     override suspend fun deleteTrip(tripId: Int) {
         TripDao.deleteTrip(tripId)
     }
@@ -48,25 +49,20 @@ class TripRepositoryImpl @Inject constructor(
         TripDao.updateTrip(trip.toEntity())
     }
 
-    override suspend fun addItineraryItem(itineraryItem: ItineraryItem) {
-        val newItineraryItem = itineraryItem.copy(id = itineraryItems.size + 1)
-        itineraryItems.add(newItineraryItem)
+
+override suspend fun addItineraryItem(itineraryItem: ItineraryItem) {
+     ItineraryItemDao.addItineraryItem(itineraryItem.toEntity())
     }
 
-    override suspend fun updateItineraryItem(itineraryItem: ItineraryItem) {
-        val index = itineraryItems.indexOfFirst { itineraryItem.id == it.id }
-        if (index != -1) {
-            itineraryItems[index] = itineraryItem
-        }
-    }
+override suspend fun updateItineraryItem(itineraryItem: ItineraryItem) {
+    ItineraryItemDao.updateItineraryItem(itineraryItem.toEntity())
+}
 
-    override suspend fun deleteItineraryItem(itineraryItemId: Int) {
-        itineraryItems.removeAll { it.id == itineraryItemId }
-    }
+override suspend fun deleteItineraryItem(itineraryItemId: Int) {
+   ItineraryItemDao.deleteItineraryItem(itineraryItemId)
+}
 
-    override suspend fun getItineraryItemsfromTrip(tripId: Int): List<ItineraryItem> {
-        return itineraryItems.filter { it.tripId == tripId }
-    }
-
-
+override suspend fun getItineraryItemsfromTrip(tripId: Int): List<ItineraryItem> {
+    return ItineraryItemDao.getItineraryItemsFromTrip(tripId).map { it.toDomain()}
+}
 }
