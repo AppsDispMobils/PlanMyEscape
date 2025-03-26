@@ -3,6 +3,7 @@ package com.example.sprint01.data.repository
 import com.example.sprint01.data.local.dao.ItineraryItemDao
 import com.example.sprint01.data.local.dao.TripDao
 import com.example.sprint01.data.local.mapper.toDomain
+import com.example.sprint01.data.local.mapper.toEntity
 import com.example.sprint01.domain.model.ItineraryItem
 import com.example.sprint01.domain.model.Trip
 import com.example.sprint01.domain.repository.TripRepository
@@ -35,19 +36,16 @@ class TripRepositoryImpl @Inject constructor(
 
     override suspend fun addTrip(trip: Trip) {
         val newTrip = trip.copy(id = trips.size + 1)
-        trips.add(newTrip)
+        val tripEntity = newTrip.toEntity()
+        TripDao.addTrip(tripEntity)
     }
 
     override suspend fun deleteTrip(tripId: Int) {
-        trips.removeAll { it.id == tripId }
+        TripDao.deleteTrip(tripId)
     }
 
     override suspend fun updateTrip(trip: Trip) {
-        val index = trips.indexOfFirst { it.id == trip.id }
-        if (index != -1) {
-            trips[index] = trip
-        }
-
+        TripDao.updateTrip(trip.toEntity())
     }
 
     override suspend fun addItineraryItem(itineraryItem: ItineraryItem) {
