@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TripDetailsViewModel @Inject constructor(
-    private val repository: TripRepository = TripRepositoryImpl(),
+    private val repository: TripRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -30,8 +30,11 @@ class TripDetailsViewModel @Inject constructor(
 
     private fun loadItineraryItems() {
         itineraryItems.clear()
-        itineraryItems.addAll(repository.getItineraryItemsfromTrip(tripId))
-        Log.d("Itinerary", "Showing all itinerary items")
+        viewModelScope.launch {
+            itineraryItems.addAll(repository.getItineraryItemsfromTrip(tripId))
+            Log.d("Itinerary", "Showing all itinerary items")
+        }
+
     }
 
     fun addItitneraryItem(itineraryItem: ItineraryItem) {
@@ -52,9 +55,11 @@ class TripDetailsViewModel @Inject constructor(
     }
 
     fun deleteItineraryItem(itineraryItemId: Int) {
-        repository.deleteItineraryItem(itineraryItemId)
-        Log.d("Itinerary", "Deleting itinerary item...")
-        loadItineraryItems()
 
+        viewModelScope.launch {
+            repository.deleteItineraryItem(itineraryItemId)
+            Log.d("Itinerary", "Deleting itinerary item...")
+            loadItineraryItems()
+        }
     }
 }

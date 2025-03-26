@@ -22,8 +22,10 @@ class ProgrammedTripsViewModel @Inject constructor(
 
     private fun loadTrips() {
         trips.clear()
-        trips.addAll(tripRepository.getTrips())
-        Log.d("Trip", "Showing all trips")
+        viewModelScope.launch {
+            trips.addAll(tripRepository.getTrips())
+            Log.d("Trip", "Showing all trips")
+        }
     }
 
     fun addTrip(trip: Trip) {
