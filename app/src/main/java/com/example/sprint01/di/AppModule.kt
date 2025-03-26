@@ -1,7 +1,8 @@
-package com.example.sprint01
+package com.example.sprint01.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.sprint01.BuildConfig
 import com.example.sprint01.data.SharedPrefsManager
 import com.example.sprint01.domain.repository.TripRepository
 import com.example.sprint01.domain.repository.TripRepositoryImpl
