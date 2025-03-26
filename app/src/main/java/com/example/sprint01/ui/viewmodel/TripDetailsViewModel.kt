@@ -5,10 +5,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.sprint01.domain.model.ItineraryItem
 import com.example.sprint01.domain.repository.TripRepository
-import com.example.sprint01.domain.repository.TripRepositoryImpl
+import com.example.sprint01.data.repository.TripRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

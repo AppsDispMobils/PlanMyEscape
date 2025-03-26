@@ -105,18 +105,18 @@ fun ProgrammedTripsScreen(
                     TripCard(
                         trip = trip,
                         onOpen = {
-                        navController.navigate("tripDetails/${trip.Id}")
+                        navController.navigate("tripDetails/${trip.id}")
                     },
                         onEdit = {
                             isEditingTrip = true
-                            currentTripId = trip.Id
+                            currentTripId = trip.id
                             tripDestination = trip.destination
                             startDate = trip.startDate
                             endDate = trip.endDate
                             showTripDialog = true
                         },
                         onDelete = {
-                            viewModel.deleteTrip(trip.Id)
+                            viewModel.deleteTrip(trip.id)
                         }
                     )
                 }
@@ -185,7 +185,7 @@ fun ProgrammedTripsScreen(
                             if (isEditingTrip) {
                                 viewModel.updateTrip(
                                     Trip(
-                                        Id = currentTripId,
+                                        id = currentTripId,
                                         destination = tripDestination,
                                         startDate = startDate,
                                         endDate = endDate

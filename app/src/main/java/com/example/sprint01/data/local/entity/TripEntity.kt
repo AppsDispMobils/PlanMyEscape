@@ -11,5 +11,5 @@ data class TripEntity(
     val destination: String,
     val startDate: String,
     val endDate: String,
-    val itineraryItem: List<ItineraryItemEntity>
+    val itineraryItem: List<ItineraryItemEntity> = emptyList()
 )

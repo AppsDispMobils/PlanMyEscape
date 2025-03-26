@@ -1,7 +1,7 @@
 package com.example.sprint01
 
 import com.example.sprint01.domain.model.Trip
-import com.example.sprint01.domain.repository.TripRepositoryImpl
+import com.example.sprint01.data.repository.TripRepositoryImpl
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -35,13 +35,13 @@ class TripUnitTest {
         assertEquals(2, tripTestRepository.getTrips().size)
 
         val firstTrip = tripTestRepository.getTrips()[0]
-        assertEquals(1, firstTrip.Id)
+        assertEquals(1, firstTrip.id)
         assertEquals("Madrid", firstTrip.destination)
         assertEquals("12-04-2025", firstTrip.startDate)
         assertEquals("14-04-2025", firstTrip.endDate)
 
         val secondTrip = tripTestRepository.getTrips()[1]
-        assertEquals(2, secondTrip.Id)
+        assertEquals(2, secondTrip.id)
         assertEquals("Barcelona", secondTrip.destination)
         assertEquals("20-06-2025", secondTrip.startDate)
         assertEquals("28-06-2025", secondTrip.endDate)
@@ -80,7 +80,7 @@ class TripUnitTest {
         assertEquals("14-04-2025", trip.endDate)
 
         val updatedTrip = Trip(
-            Id = 1,
+            id = 1,
             destination = "Barcelona",
             startDate = "20-06-2025",
             endDate = "28-06-2025"
@@ -107,7 +107,7 @@ class TripUnitTest {
         tripTestRepository.addTrip(testTrip)
         assertEquals(1, tripTestRepository.getTrips().size)
 
-        val tripId = tripTestRepository.getTrips()[0].Id
+        val tripId = tripTestRepository.getTrips()[0].id
 
         tripTestRepository.deleteTrip(tripId)
         assertEquals(0, tripTestRepository.getTrips().size)

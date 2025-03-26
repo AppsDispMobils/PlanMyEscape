@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Scaffold
@@ -102,14 +101,14 @@ fun TripDetailsScreen(
                             itineraryItem = itineraryItem,
                             onEdit = {
                                 isEditingItineraryItem = true
-                                currentItineraryItemId = itineraryItem.Id
+                                currentItineraryItemId = itineraryItem.id
                                 itineraryItemTitle = itineraryItem.title
                                 description = itineraryItem.description
                                 date = itineraryItem.date
                                 showItineraryItemDialog = true
                             },
                             onDelete = {
-                                viewModel.deleteItineraryItem(itineraryItem.Id)
+                                viewModel.deleteItineraryItem(itineraryItem.id)
                             }
                         )
                     }
@@ -177,7 +176,7 @@ fun TripDetailsScreen(
                             if (isEditingItineraryItem) {
                                 viewModel.updateItineraryItem(
                                     ItineraryItem(
-                                        Id = currentItineraryItemId,
+                                        id = currentItineraryItemId,
                                         title = itineraryItemTitle,
                                         description = description,
                                         tripId = viewModel.tripId,
