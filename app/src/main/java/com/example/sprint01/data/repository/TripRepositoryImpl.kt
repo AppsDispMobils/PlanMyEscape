@@ -3,6 +3,7 @@ package com.example.sprint01.data.repository
 import com.example.sprint01.data.local.dao.ItineraryItemDao
 import com.example.sprint01.data.local.dao.TripDao
 import com.example.sprint01.data.local.mapper.toDomain
+import com.example.sprint01.data.local.mapper.toEntity
 import com.example.sprint01.domain.model.ItineraryItem
 import com.example.sprint01.domain.model.Trip
 import com.example.sprint01.domain.repository.TripRepository
@@ -38,6 +39,7 @@ class TripRepositoryImpl @Inject constructor(
         trips.add(newTrip)
     }
 
+
     override suspend fun deleteTrip(tripId: Int) {
         trips.removeAll { it.id == tripId }
     }
@@ -50,25 +52,20 @@ class TripRepositoryImpl @Inject constructor(
 
     }
 
-    override suspend fun addItineraryItem(itineraryItem: ItineraryItem) {
-        val newItineraryItem = itineraryItem.copy(id = itineraryItems.size + 1)
-        itineraryItems.add(newItineraryItem)
+
+override suspend fun addItineraryItem(itineraryItem: ItineraryItem) {
+     ItineraryItemDao.addItineraryItem(itineraryItem.toEntity())
     }
 
-    override suspend fun updateItineraryItem(itineraryItem: ItineraryItem) {
-        val index = itineraryItems.indexOfFirst { itineraryItem.id == it.id }
-        if (index != -1) {
-            itineraryItems[index] = itineraryItem
-        }
-    }
+override suspend fun updateItineraryItem(itineraryItem: ItineraryItem) {
+    ItineraryItemDao.updateItineraryItem(itineraryItem.toEntity())
+}
 
-    override suspend fun deleteItineraryItem(itineraryItemId: Int) {
-        itineraryItems.removeAll { it.id == itineraryItemId }
-    }
+override suspend fun deleteItineraryItem(itineraryItemId: Int) {
+   ItineraryItemDao.deleteItineraryItem(itineraryItemId)
+}
 
-    override suspend fun getItineraryItemsfromTrip(tripId: Int): List<ItineraryItem> {
-        return itineraryItems.filter { it.tripId == tripId }
-    }
-
-
+override suspend fun getItineraryItemsfromTrip(tripId: Int): List<ItineraryItem> {
+    return ItineraryItemDao.getItineraryItemsFromTrip(tripId).map { it.toDomain()}
+}
 }
