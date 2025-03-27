@@ -16,8 +16,6 @@ class TripRepositoryImpl @Inject constructor(
     private val ItineraryItemDao: ItineraryItemDao
 ) : TripRepository {
 
-    private val trips = mutableListOf<Trip>()
-    private val itineraryItems = mutableListOf<ItineraryItem>()
 
     override suspend fun getTrips(): List<Trip> {
         val trips = TripDao.getTrips()
@@ -35,9 +33,7 @@ class TripRepositoryImpl @Inject constructor(
     }
 
     override suspend fun addTrip(trip: Trip) {
-        val newTrip = trip.copy(id = trips.size + 1)
-        val tripEntity = newTrip.toEntity()
-        TripDao.addTrip(tripEntity)
+        TripDao.addTrip(trip.toEntity())
     }
 
 
