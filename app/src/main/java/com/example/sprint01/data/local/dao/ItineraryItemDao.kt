@@ -9,7 +9,7 @@ import com.example.sprint01.data.local.entity.ItineraryItemEntity
 
 @Dao
 interface ItineraryItemDao {
-    @Query("SELECT * FROM itineraryItems where tripId = :tripId")
+    @Query("SELECT * FROM itineraryItems where tripId = :tripId ORDER BY date ASC")
     suspend fun getItineraryItemsFromTrip(tripId: Int) : List<ItineraryItemEntity>
 
     @Insert

@@ -9,7 +9,7 @@ import com.example.sprint01.data.local.entity.TripEntity
 
 @Dao
 interface TripDao {
-    @Query("SELECT * FROM trips")
+    @Query("SELECT * FROM trips ORDER BY startDate ASC")
     suspend fun getTrips(): List<TripEntity>
 
     @Insert
