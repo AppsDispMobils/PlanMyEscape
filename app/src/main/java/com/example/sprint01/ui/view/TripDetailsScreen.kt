@@ -33,12 +33,16 @@ import com.example.sprint01.R
 import com.example.sprint01.R.color.app_color
 import com.example.sprint01.domain.model.ItineraryItem
 import com.example.sprint01.ui.viewmodel.TripDetailsViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TripDetailsScreen(
     navController: NavController,
-    viewModel: TripDetailsViewModel = hiltViewModel()
+    viewModel: TripDetailsViewModel = hiltViewModel(),
+    tripStartDate: String,
+    tripEndDate: String
 ) {
 
     val itineraryItems = viewModel.itineraryItems
@@ -55,6 +59,7 @@ fun TripDetailsScreen(
     //Validación de los inputs
     var dateError by remember { mutableStateOf<String?>(null) }
     var fieldError by remember { mutableStateOf<String?>(null) }
+    var dateRangeError by remember { mutableStateOf<String?>(null) }
 
     Scaffold(
         topBar = {
@@ -157,10 +162,12 @@ fun TripDetailsScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 8.dp),
-                        isError = dateError != null,
+                        isError = dateError != null || dateRangeError != null,
                         supportingText = {
                             if (dateError != null) {
                                 Text(text = dateError!!, color = Color.Red)
+                            }else if(dateRangeError != null){
+                                Text(text = dateRangeError!!, color = Color.Red)
                             }
                         }
                     )
@@ -171,8 +178,9 @@ fun TripDetailsScreen(
                     onClick = {
                         fieldError = if (validateFields(itineraryItemTitle, description, date)) null else "Faltan campos requeridos"
                         dateError = if (isValidDate(date)) null else "Fecha no permitida"
+                        dateRangeError = if (isDateInActivityRange(date, tripStartDate, tripEndDate)) null else "Fecha fuera del rango del viaje"
 
-                        if ((fieldError == null) && (dateError == null)){
+                        if ((fieldError == null) && (dateError == null) && (dateRangeError == null)){
                             if (isEditingItineraryItem) {
                                 viewModel.updateItineraryItem(
                                     ItineraryItem(
@@ -246,4 +254,18 @@ fun ItineraryItemCard(
 
         }
     }
+}
+
+fun isDateInActivityRange(activityDate: String,tripStartDate: String, tripEndDate:String): Boolean{
+    if (!isValidDate(activityDate) || !isValidDate(tripStartDate) || !isValidDate(tripEndDate)) {
+        return false
+    }
+    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    dateFormat.isLenient = false
+
+    val activity = dateFormat.parse(activityDate) ?: return false
+    val start = dateFormat.parse(tripStartDate) ?: return false
+    val end = dateFormat.parse(tripEndDate) ?: return false
+
+    return activity in start..end
 }

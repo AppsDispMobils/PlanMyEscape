@@ -105,7 +105,7 @@ fun ProgrammedTripsScreen(
                     TripCard(
                         trip = trip,
                         onOpen = {
-                        navController.navigate("tripDetails/${trip.id}")
+                        navController.navigate("tripDetails/${trip.id}/${trip.startDate}/${trip.endDate}")
                     },
                         onEdit = {
                             isEditingTrip = true

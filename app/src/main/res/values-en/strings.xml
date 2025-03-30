@@ -65,4 +65,8 @@
     <string name="Login_Text">Log In</string>
     <string name="Login_Error">Login Error</string>
     <string name="Login_Error1">Incorrect username or password. Please try again.</string>
+
+    <string name="field_required">Faltan campos requeridos</string>
+    <string name="invalid_date">Fecha no permitida</string>
+    <string name="date_out_of_range">Fecha fuera del rango del viaje</string>
 </resources>

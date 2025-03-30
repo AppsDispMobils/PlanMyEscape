@@ -56,7 +56,7 @@
     <string name="Home">Inicio App</string>
     <string name="Dark_Theme">Tema Oscuro</string>
 
-    <string name="Login_Screen">Escena Login</string>
+    <string name="Login_Screen">Inicio de Sesión</string>
     <string name="UsernameText">Usuario</string>PasswordText
     <string name="UsernameText1">Usuario Incorrecto</string>
     <string name="PasswordText">Contraseña</string>
@@ -65,4 +65,7 @@
     <string name="Login_Text">Iniciar Sesion</string>
     <string name="Login_Error">Error Iniciar Sesion</string>
     <string name="Login_Error1">Incorrect username or password. Please try again.</string>
+    <string name="field_required">Campos obligatorios ausentes</string>
+    <string name="invalid_date">Fecha inválida</string>
+    <string name="date_out_of_range">Fecha fuera del rango del viaje</string>
 </resources>

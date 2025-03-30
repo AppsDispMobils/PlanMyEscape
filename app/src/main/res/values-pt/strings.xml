@@ -65,4 +65,7 @@
     <string name="Login_Text">Entrar</string>
     <string name="Login_Error">Erro de Login</string>
     <string name="Login_Error1">Usuário ou senha incorretos. Por favor, tente novamente.</string>
+    <string name="field_required">Campos obrigatórios ausentes</string>
+    <string name="invalid_date">Data inválida</string>
+    <string name="date_out_of_range">Data fora do intervalo da viagem</string>
 </resources>

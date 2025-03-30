@@ -31,10 +31,16 @@ fun NavGraph(navController: NavHostController) {
         composable ("programmedTrips") { ProgrammedTripsScreen(navController) }
         composable ("planNewTrip") { PlanNewTripScreen(navController) }
         composable(
-            route = "tripDetails/{tripId}",
-            arguments = listOf(navArgument("tripId") { type = NavType.IntType})
+            route =  "tripDetails/{tripId}/{tripStartDate}/{tripEndDate}",
+            arguments = listOf(
+                navArgument("tripId") { type = NavType.IntType },
+                navArgument("tripStartDate") { type = NavType.StringType },
+                navArgument("tripEndDate") { type = NavType.StringType })
         ) {
-            TripDetailsScreen(navController = navController)
+            backStackEntry ->
+            val tripStartDate = backStackEntry.arguments?.getString("tripStartDate") ?: ""
+            val tripEndDate = backStackEntry.arguments?.getString("tripEndDate") ?: ""
+            TripDetailsScreen(navController, tripStartDate = tripStartDate, tripEndDate = tripEndDate)
         }
     }
 
