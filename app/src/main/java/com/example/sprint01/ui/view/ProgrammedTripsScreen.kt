@@ -32,6 +32,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sprint01.R
 import com.example.sprint01.R.color.app_color
+import com.example.sprint01.data.local.dao.TripDao
 import com.example.sprint01.domain.model.Trip
 import com.example.sprint01.ui.viewmodel.ProgrammedTripsViewModel
 import java.text.SimpleDateFormat
@@ -56,6 +57,7 @@ fun ProgrammedTripsScreen(
     //Validacion datos de entrada
     var dateError by remember { mutableStateOf<String?>(null) }
     var fieldError by remember { mutableStateOf<String?>(null) }
+    var destinationError by remember { mutableStateOf<String?>(null) }
 
 
 
@@ -105,8 +107,8 @@ fun ProgrammedTripsScreen(
                     TripCard(
                         trip = trip,
                         onOpen = {
-                        navController.navigate("tripDetails/${trip.id}/${trip.startDate}/${trip.endDate}")
-                    },
+                            navController.navigate("tripDetails/${trip.id}/${trip.startDate}/${trip.endDate}")
+                        },
                         onEdit = {
                             isEditingTrip = true
                             currentTripId = trip.id
@@ -138,10 +140,12 @@ fun ProgrammedTripsScreen(
                         onValueChange = { tripDestination = it },
                         label = { Text(stringResource(id = R.string.trip_Card1)) },
                         modifier = Modifier.fillMaxWidth(),
-                        isError = fieldError != null,
+                        isError = fieldError != null && destinationError != null,
                         supportingText = {
                             if (fieldError != null) {
                                 Text(text = fieldError!!, color = Color.Red)
+                            } else if (destinationError != null) {
+                                Text(text = destinationError!!, color = Color.Red)
                             }
                         }
                     )
@@ -178,29 +182,40 @@ fun ProgrammedTripsScreen(
             confirmButton = {
                 Button(
                     onClick = {
-                        dateError = if (areValidDates(startDate, endDate)) null else "Fechas no válidas"
-                        fieldError = if (validateFields(tripDestination, startDate, endDate)) null else "Faltan campos requeridos"
+                        dateError =
+                            if (areValidDates(startDate, endDate)) null else "Fechas no válidas"
+                        fieldError = if (validateFields(
+                                tripDestination,
+                                startDate,
+                                endDate
+                            )
+                        ) null else "Faltan campos requeridos"
+                        viewModel.validateTripDestination(tripDestination.uppercase()) { isAvailable ->
+                            destinationError =
+                                if (isAvailable) null else "El destino ya pertenece a un viaje"
 
-                        if ((dateError == null) && (fieldError == null)){
-                            if (isEditingTrip) {
-                                viewModel.updateTrip(
-                                    Trip(
-                                        id = currentTripId,
-                                        destination = tripDestination,
-                                        startDate = startDate,
-                                        endDate = endDate
+
+                            if ((dateError == null) && (fieldError == null) && (destinationError == null)) {
+                                if (isEditingTrip) {
+                                    viewModel.updateTrip(
+                                        Trip(
+                                            id = currentTripId,
+                                            destination = tripDestination.uppercase(),
+                                            startDate = startDate,
+                                            endDate = endDate
+                                        )
                                     )
-                                )
-                            } else {
-                                viewModel.addTrip(
-                                    Trip(
-                                        destination = tripDestination,
-                                        startDate = startDate,
-                                        endDate = endDate
+                                } else {
+                                    viewModel.addTrip(
+                                        Trip(
+                                            destination = tripDestination.uppercase(),
+                                            startDate = startDate,
+                                            endDate = endDate
+                                        )
                                     )
-                                )
+                                }
+                                showTripDialog = false
                             }
-                            showTripDialog = false
                         }
                     }
                 ) {
@@ -228,6 +243,7 @@ fun validateFields(firstInput: String, secondInput: String, thirdInput: String):
 
     return isValid
 }
+
 
 fun areValidDates(startDate: String, endDate: String): Boolean {
     if (!isValidDate(startDate) || !isValidDate(endDate) ) return false

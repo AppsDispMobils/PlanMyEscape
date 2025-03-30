@@ -9,6 +9,7 @@ interface TripRepository {
     suspend fun addTrip(trip: Trip)
     suspend fun deleteTrip(tripId: Int)
     suspend fun updateTrip(trip: Trip)
+    suspend fun validateTripDestination(tripDestination: String): Int
 
     suspend fun getItineraryItemsfromTrip(tripId: Int): List<ItineraryItem>
     suspend fun addItineraryItem(itineraryItem: ItineraryItem)

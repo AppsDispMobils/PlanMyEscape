@@ -55,5 +55,13 @@ class ProgrammedTripsViewModel @Inject constructor(
         }
     }
 
+    fun validateTripDestination(tripDestination: String, onResult: (Boolean) -> Unit) {
+        viewModelScope.launch {
+            val count = tripRepository.validateTripDestination(tripDestination)
+            Log.d("Trip", "Trip con el mismo destino: " + count )
+            onResult(count == 0) // Si count es 0, el destino está disponible
+        }
+    }
+
 
 }

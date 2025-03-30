@@ -1,5 +1,6 @@
 package com.example.sprint01.data.repository
 
+import android.util.Log
 import com.example.sprint01.data.local.dao.ItineraryItemDao
 import com.example.sprint01.data.local.dao.TripDao
 import com.example.sprint01.data.local.mapper.toDomain
@@ -19,46 +20,51 @@ class TripRepositoryImpl @Inject constructor(
 
     override suspend fun getTrips(): List<Trip> {
         val trips = TripDao.getTrips()
-
+        Log.d("Database", "Getting all trips from DB")
         return trips.map { trip ->
             val itineraryItem = ItineraryItemDao.getItineraryItemsFromTrip(trip.id).map { it.toDomain() }
             trip.toDomain(itineraryItem)
         }
-
-
-        //return trips.map { trip ->
-        //    trip.copy(itineraryItems = itineraryItems.filter { it.tripId == trip.id })
-        //}
-
     }
 
     override suspend fun addTrip(trip: Trip) {
+        Log.d("Database", "Adding trip in DB")
         TripDao.addTrip(trip.toEntity())
     }
 
 
     override suspend fun deleteTrip(tripId: Int) {
+        Log.d("Database", "Deleting trip in DB")
         TripDao.deleteTrip(tripId)
     }
 
     override suspend fun updateTrip(trip: Trip) {
+        Log.d("Database", "Updating trip in DB")
         TripDao.updateTrip(trip.toEntity())
     }
 
-
-override suspend fun addItineraryItem(itineraryItem: ItineraryItem) {
-     ItineraryItemDao.addItineraryItem(itineraryItem.toEntity())
+    override suspend fun validateTripDestination(tripDestination: String): Int {
+        return TripDao.validateTripDestination(tripDestination)
     }
 
-override suspend fun updateItineraryItem(itineraryItem: ItineraryItem) {
-    ItineraryItemDao.updateItineraryItem(itineraryItem.toEntity())
-}
 
-override suspend fun deleteItineraryItem(itineraryItemId: Int) {
-   ItineraryItemDao.deleteItineraryItem(itineraryItemId)
-}
+    override suspend fun addItineraryItem(itineraryItem: ItineraryItem) {
+        Log.d("Database", "Adding itinerary item to DB")
+        ItineraryItemDao.addItineraryItem(itineraryItem.toEntity())
+    }
 
-override suspend fun getItineraryItemsfromTrip(tripId: Int): List<ItineraryItem> {
-    return ItineraryItemDao.getItineraryItemsFromTrip(tripId).map { it.toDomain()}
-}
+    override suspend fun updateItineraryItem(itineraryItem: ItineraryItem) {
+        Log.d("Database", "Updating itinerary item in DB")
+        ItineraryItemDao.updateItineraryItem(itineraryItem.toEntity())
+    }
+
+    override suspend fun deleteItineraryItem(itineraryItemId: Int) {
+        Log.d("Database", "Deleting itinerary item in DB")
+        ItineraryItemDao.deleteItineraryItem(itineraryItemId)
+    }
+
+    override suspend fun getItineraryItemsfromTrip(tripId: Int): List<ItineraryItem> {
+        Log.d("Database", "Getting all itinerary items from DB")
+        return ItineraryItemDao.getItineraryItemsFromTrip(tripId).map { it.toDomain()}
+    }
 }

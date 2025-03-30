@@ -20,4 +20,7 @@ interface TripDao {
 
     @Update
     suspend fun updateTrip(trip: TripEntity)
+
+    @Query("SELECT count(*) FROM trips where destination = :tripDestination")
+    suspend fun validateTripDestination(tripDestination: String): Int
 }
