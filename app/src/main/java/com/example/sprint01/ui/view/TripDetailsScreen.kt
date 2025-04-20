@@ -1,5 +1,6 @@
 package com.example.sprint01.ui.view
 
+import android.icu.util.Calendar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -20,10 +21,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -48,13 +54,17 @@ fun TripDetailsScreen(
     val itineraryItems = viewModel.itineraryItems
 
     val selectedIndex by remember { mutableStateOf(0) }
+    val context = LocalContext.current
 
+    val calendar = Calendar.getInstance()
     var isEditingItineraryItem by remember { mutableStateOf(false) }
     var showItineraryItemDialog by remember { mutableStateOf(false) }
     var currentItineraryItemId by remember { mutableStateOf(0) }
     var itineraryItemTitle by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var date by remember { mutableStateOf("") }
+    var startTime by remember { mutableStateOf("") }
+    var endTime by remember { mutableStateOf("") }
 
     //Validación de los inputs
     var dateError by remember { mutableStateOf<String?>(null) }
@@ -92,36 +102,36 @@ fun TripDetailsScreen(
                 navController
             )
         }
-        ) { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(16.dp)
-            ) {
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(16.dp)
+        ) {
 
-                LazyColumn {
-                    items(itineraryItems) { itineraryItem ->
-                        ItineraryItemCard(
-                            itineraryItem = itineraryItem,
-                            onEdit = {
-                                isEditingItineraryItem = true
-                                currentItineraryItemId = itineraryItem.id
-                                itineraryItemTitle = itineraryItem.title
-                                description = itineraryItem.description
-                                date = itineraryItem.date
-                                showItineraryItemDialog = true
-                            },
-                            onDelete = {
-                                viewModel.deleteItineraryItem(itineraryItem.id)
-                            }
-                        )
-                    }
+            LazyColumn {
+                items(itineraryItems) { itineraryItem ->
+                    ItineraryItemCard(
+                        itineraryItem = itineraryItem,
+                        onEdit = {
+                            isEditingItineraryItem = true
+                            currentItineraryItemId = itineraryItem.id
+                            itineraryItemTitle = itineraryItem.title
+                            description = itineraryItem.description
+                            date = itineraryItem.date
+                            showItineraryItemDialog = true
+                        },
+                        onDelete = {
+                            viewModel.deleteItineraryItem(itineraryItem.id)
+                        }
+                    )
                 }
-
-
             }
+
+
         }
+    }
 
     if(showItineraryItemDialog) {
         AlertDialog(
@@ -155,27 +165,101 @@ fun TripDetailsScreen(
                             }
                         }
                     )
-                    OutlinedTextField(
-                        value = date,
-                        onValueChange = { date = it },
-                        label = { Text(stringResource(id = R.string.itnry_Card3 ) + " (dd-MM-yyyy)") },
+                    Box (
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(top = 8.dp),
-                        isError = dateError != null || dateRangeError != null,
-                        supportingText = {
-                            if (dateError != null) {
-                                Text(text = dateError!!, color = Color.Red)
-                            }else if(dateRangeError != null){
-                                Text(text = dateRangeError!!, color = Color.Red)
+                            .clickable {
+                                DatePickerDialog(
+                                    context,
+                                    { _, year, month, dayOfMonth ->
+                                        date = "%04d-%02d-%02d".format(year, month + 1, dayOfMonth)
+                                    },
+                                    calendar.get(Calendar.YEAR),
+                                    calendar.get(Calendar.MONTH),
+                                    calendar.get(Calendar.DAY_OF_MONTH)
+                                ).show()
                             }
-                        }
-                    )
+                    ) {
+                        OutlinedTextField(
+                            value = date,
+                            onValueChange = { date = it },
+                            label = { Text(stringResource(id = R.string.itnry_Card3)) },
+                            readOnly = true,
+                            enabled = false,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 8.dp),
+                            isError = dateError != null || dateRangeError != null,
+                            supportingText = {
+                                if (dateError != null) {
+                                    Text(text = dateError!!, color = Color.Red)
+                                } else if (dateRangeError != null) {
+                                    Text(text = dateRangeError!!, color = Color.Red)
+                                }
+                            }
+                        )
+                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                TimePickerDialog(
+                                    context,
+                                    { _, hourOfDay, minute ->
+                                        startTime = "%02d:%02d".format(hourOfDay, minute)
+                                    },
+                                    calendar.get(Calendar.HOUR_OF_DAY),
+                                    calendar.get(Calendar.MINUTE),
+                                    true
+                                ).show()
+                            }
+                    ){
+                        OutlinedTextField(
+                            value = startTime,
+                            onValueChange = { startTime = it },
+                            label = { Text("Start Time") },
+                            readOnly = true,
+                            enabled = false,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 8.dp)
+                        )
+
+                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                TimePickerDialog(
+                                    context,
+                                    { _, hourOfDay, minute ->
+                                        endTime = "%02d:%02d".format(hourOfDay, minute)
+                                    },
+                                    calendar.get(Calendar.HOUR_OF_DAY),
+                                    calendar.get(Calendar.MINUTE),
+                                    true
+                                ).show()
+                            }
+                    ){
+                        OutlinedTextField(
+                            value = endTime,
+                            onValueChange = { endTime = it },
+                            label = { Text("End Time") },
+                            readOnly = true,
+                            enabled = false,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 8.dp)
+                        )
+
+                    }
+                    Log.d("DEBUG", "Guardando: date=$date, start=$startTime, end=$endTime")
                 }
             },
             confirmButton = {
                 Button(
                     onClick = {
+
                         fieldError = if (validateFields(itineraryItemTitle, description, date)) null else "Faltan campos requeridos"
                         dateError = if (isValidDate(date)) null else "Fecha no permitida"
                         dateRangeError = if (isDateInActivityRange(date, tripStartDate, tripEndDate)) null else "Fecha fuera del rango del viaje"
@@ -188,7 +272,9 @@ fun TripDetailsScreen(
                                         title = itineraryItemTitle,
                                         description = description,
                                         tripId = viewModel.tripId,
-                                        date = date
+                                        date = date,
+                                        startTime = startTime,
+                                        endTime = endTime
                                     )
                                 )
                             } else {
@@ -197,7 +283,9 @@ fun TripDetailsScreen(
                                         title = itineraryItemTitle,
                                         description = description,
                                         tripId = viewModel.tripId,
-                                        date = date
+                                        date = date,
+                                        startTime = startTime,
+                                        endTime = endTime
                                     )
                                 )
                             }
@@ -256,11 +344,11 @@ fun ItineraryItemCard(
     }
 }
 
-fun isDateInActivityRange(activityDate: String,tripStartDate: String, tripEndDate:String): Boolean{
+fun isDateInActivityRange(activityDate: String, tripStartDate: String, tripEndDate:String): Boolean {
     if (!isValidDate(activityDate) || !isValidDate(tripStartDate) || !isValidDate(tripEndDate)) {
         return false
     }
-    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     dateFormat.isLenient = false
 
     val activity = dateFormat.parse(activityDate) ?: return false

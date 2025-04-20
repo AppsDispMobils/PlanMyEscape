@@ -14,7 +14,8 @@ fun Trip.toEntity(): TripEntity =
 fun ItineraryItem.toEntity(): ItineraryItemEntity =
     ItineraryItemEntity(
         id = id, title = title, tripId = tripId,
-        description = description, date = date
+        description = description, date = date,
+        startTime = startTime, endTime = endTime
     )
 
 fun TripEntity.toDomain(itineraryItems: List<ItineraryItem> ): Trip =
@@ -27,5 +28,6 @@ fun TripEntity.toDomain(itineraryItems: List<ItineraryItem> ): Trip =
 fun ItineraryItemEntity.toDomain(): ItineraryItem =
     ItineraryItem(
         id = id, title = title, tripId = tripId,
-        description = description, date = date
+        description = description, date = date,
+        startTime = startTime, endTime = endTime
     )

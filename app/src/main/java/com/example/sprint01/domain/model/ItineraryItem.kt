@@ -7,5 +7,7 @@ data class ItineraryItem(
     val title: String,
     val tripId: Int,
     val description: String,
-    val date: String
+    val date: String,
+    val startTime: String,
+    val endTime: String
 )
