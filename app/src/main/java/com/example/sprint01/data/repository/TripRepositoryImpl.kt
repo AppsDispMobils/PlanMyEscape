@@ -7,6 +7,7 @@ import com.example.sprint01.data.local.mapper.toDomain
 import com.example.sprint01.data.local.mapper.toEntity
 import com.example.sprint01.domain.model.ItineraryItem
 import com.example.sprint01.domain.model.Trip
+import com.example.sprint01.domain.repository.AuthenticationRepository
 import com.example.sprint01.domain.repository.TripRepository
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -14,12 +15,14 @@ import javax.inject.Singleton
 @Singleton
 class TripRepositoryImpl @Inject constructor(
     private val TripDao: TripDao,
-    private val ItineraryItemDao: ItineraryItemDao
+    private val ItineraryItemDao: ItineraryItemDao,
+    private val authenticationRepository: AuthenticationRepository
 ) : TripRepository {
 
 
     override suspend fun getTrips(): List<Trip> {
-        val trips = TripDao.getTrips()
+        val userId = authenticationRepository.getCurrentId()
+        val trips = TripDao.getTrips(userId)
         Log.d("Database", "Getting all trips from DB")
         return trips.map { trip ->
             val itineraryItem = ItineraryItemDao.getItineraryItemsFromTrip(trip.id).map { it.toDomain() }
@@ -44,7 +47,8 @@ class TripRepositoryImpl @Inject constructor(
     }
 
     override suspend fun validateTripDestination(tripDestination: String): Int {
-        return TripDao.validateTripDestination(tripDestination)
+        val userId = authenticationRepository.getCurrentId()
+        return TripDao.validateTripDestination(tripDestination, userId)
     }
 
 

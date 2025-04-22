@@ -26,13 +26,20 @@ import com.example.sprint01.R
 import com.example.sprint01.ui.view.BottomNavigationBar
 import com.example.sprint01.ui.viewmodel.SettingsViewModel
 import android.util.Log
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import com.example.sprint01.ui.viewmodel.AuthState
+import com.example.sprint01.ui.viewmodel.AuthenticationViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     navController: NavController,
-    viewModel: SettingsViewModel = hiltViewModel()
+    viewModel: SettingsViewModel = hiltViewModel(),
+    authViewModel: AuthenticationViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val sharedPreferences = context.getSharedPreferences("Settings", Context.MODE_PRIVATE)
@@ -41,7 +48,17 @@ fun SettingsScreen(
     val language = viewModel.language // Obtenemos el idioma desde el ViewModel
     val isDarkTheme = viewModel.isDarkTheme
 
+    val authState = authViewModel.authState.observeAsState()
+    val appColor = colorResource(id = R.color.app_color)
+
     Log.d("SettingsScreen", "Idioma actual: $language, Tema oscuro: $isDarkTheme")
+
+    LaunchedEffect(authState.value) {
+        when(authState.value) {
+            is AuthState.Unauthenticated -> navController.navigate("login")
+            else -> Unit
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -124,7 +141,26 @@ fun SettingsScreen(
                     )
                 }
 
+                Spacer(modifier = Modifier.height(10.dp))
+                Button(
+                    onClick = {
+                        authViewModel.logout()
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = appColor,
+                        contentColor = Color.White
+                    ),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("Cerrar sesión")
+                }
+
                 Spacer(modifier = Modifier.height(20.dp))
+
+
 
             }
         }

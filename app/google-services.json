@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730832560147",
+    "project_id": "planmyescape-7d12f",
+    "storage_bucket": "planmyescape-7d12f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730832560147:android:898a839a2db64c1b0c5fe6",
+        "android_client_info": {
+          "package_name": "com.example.sprint01"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRzdMzG8F2PjcHs1zYuLB9WRuA-loQg84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

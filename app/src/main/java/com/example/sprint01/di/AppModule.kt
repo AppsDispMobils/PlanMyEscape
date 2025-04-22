@@ -8,8 +8,11 @@ import com.example.sprint01.data.SharedPrefsManager
 import com.example.sprint01.data.local.PlanMyEscapeDatabase
 import com.example.sprint01.data.local.dao.ItineraryItemDao
 import com.example.sprint01.data.local.dao.TripDao
+import com.example.sprint01.data.local.dao.UserDao
+import com.example.sprint01.data.repository.AuthenticationRepositoryImpl
 import com.example.sprint01.domain.repository.TripRepository
 import com.example.sprint01.data.repository.TripRepositoryImpl
+import com.example.sprint01.domain.repository.AuthenticationRepository
 import com.example.sprint01.ui.viewmodel.ProgrammedTripsViewModel
 import dagger.Module
 import dagger.Provides
@@ -17,6 +20,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import com.google.firebase.auth.FirebaseAuth
 
 
 @Module
@@ -25,11 +29,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTripRepository(tripDao: TripDao, itineraryItemDao: ItineraryItemDao): TripRepository = TripRepositoryImpl(tripDao, itineraryItemDao)
+    fun provideAuthenticationRepository(firebaseAuth: FirebaseAuth, userDao: UserDao): AuthenticationRepository =
+        AuthenticationRepositoryImpl(firebaseAuth, userDao)
 
     @Provides
     @Singleton
-    fun provideTripViewModel(trip: TripRepository): ProgrammedTripsViewModel = ProgrammedTripsViewModel(trip)
+    fun provideTripRepository(tripDao: TripDao, itineraryItemDao: ItineraryItemDao, authenticationRepository: AuthenticationRepository): TripRepository =
+        TripRepositoryImpl(tripDao, itineraryItemDao, authenticationRepository)
+
+    @Provides
+    @Singleton
+    fun provideTripViewModel(trip: TripRepository, authenticationRepository: AuthenticationRepository): ProgrammedTripsViewModel =
+        ProgrammedTripsViewModel(trip, authenticationRepository)
 
     @Provides
     @Singleton
@@ -63,6 +74,13 @@ object AppModule {
 
     @Provides
     fun provideItineraryItemDao(db: PlanMyEscapeDatabase) : ItineraryItemDao = db.itineraryItemDao()
+
+    @Provides
+    fun provideUserDao(db: PlanMyEscapeDatabase) : UserDao = db.userDao()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
 
 

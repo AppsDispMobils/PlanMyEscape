@@ -9,8 +9,8 @@ import com.example.sprint01.data.local.entity.TripEntity
 
 @Dao
 interface TripDao {
-    @Query("SELECT * FROM trips ORDER BY startDate ASC")
-    suspend fun getTrips(): List<TripEntity>
+    @Query("SELECT * FROM trips WHERE userId = :userId ORDER BY startDate ASC")
+    suspend fun getTrips(userId: String): List<TripEntity>
 
     @Insert
     suspend fun addTrip(trip: TripEntity)
@@ -21,6 +21,6 @@ interface TripDao {
     @Update
     suspend fun updateTrip(trip: TripEntity)
 
-    @Query("SELECT count(*) FROM trips where destination = :tripDestination")
-    suspend fun validateTripDestination(tripDestination: String): Int
+    @Query("SELECT count(*) FROM trips WHERE destination = :tripDestination AND userId = :userId")
+    suspend fun validateTripDestination(tripDestination: String, userId: String): Int
 }

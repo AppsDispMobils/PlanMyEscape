@@ -1,11 +1,10 @@
 package com.example.sprint01.ui.view
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
@@ -19,14 +18,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.sprint01.R
+import com.example.sprint01.ui.viewmodel.AuthenticationViewModel
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.platform.LocalContext
+import com.example.sprint01.ui.viewmodel.AuthState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen(
+    navController: NavController,
+    authViewModel : AuthenticationViewModel = hiltViewModel()
+) {
 
-    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showAlert by remember { mutableStateOf(false) }
 
@@ -34,10 +41,22 @@ fun LoginScreen(navController: NavController) {
     var usernameError by remember {mutableStateOf(false)}
     var passwordError by remember {mutableStateOf(false)}
 
+    val authState = authViewModel.authState.observeAsState()
+    val context = LocalContext.current
+
     val defaultUser = stringResource(id = R.string.username)
     val defaultPass = stringResource(id = R.string.password)
 
     val appColor = colorResource(id = R.color.app_color)
+
+    LaunchedEffect(authState.value) {
+        when(authState.value){
+            is AuthState.Authenticated -> navController.navigate("home")
+            is AuthState.Error -> Toast.makeText(context,
+                (authState.value as AuthState.Error).message, Toast.LENGTH_SHORT).show()
+            else -> Unit
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -58,10 +77,10 @@ fun LoginScreen(navController: NavController) {
 
         // Campo de nombre de usuario
         OutlinedTextField(
-            value = username,
+            value = email,
             onValueChange = {
-                username = it
-                Log.d("LoginScreen", "Username entered: $username") // Log para el nombre de usuario
+                email = it
+                Log.d("LoginScreen", "Username entered: $email") // Log para el nombre de usuario
             },
             label = { Text(stringResource(id=R.string.UsernameText), color = Color.DarkGray) },
             leadingIcon = {
@@ -128,17 +147,9 @@ fun LoginScreen(navController: NavController) {
         // Botón de inicio de sesión
         Button(
             onClick = {
-                Log.d("LoginScreen", "Login button clicked") // Log para el clic en el botón de login
-                if (username == defaultUser && password == defaultPass) {
-                    Log.d("LoginScreen", "Login successful for user: $username")
-                    navController.navigate("home")
-                } else {
-                    showError = true
-                    usernameError = username != defaultUser
-                    passwordError = password != defaultPass
-                    Log.d("LoginScreen", "Login failed: Incorrect username or password")
-                }
+                authViewModel.login(email, password)
             },
+            enabled = authState.value != AuthState.Loading,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(50.dp),
@@ -149,6 +160,11 @@ fun LoginScreen(navController: NavController) {
             shape = RoundedCornerShape(12.dp) // Bordes redondeados
         ) {
             Text(text = stringResource(id = R.string.Login_Text), fontSize = 16.sp, color = Color.Gray)
+        }
+        TextButton(onClick = {
+            navController.navigate("signup")
+        }) {
+            Text("Registrarse")
         }
 
         // Mostrar alerta si hay un error

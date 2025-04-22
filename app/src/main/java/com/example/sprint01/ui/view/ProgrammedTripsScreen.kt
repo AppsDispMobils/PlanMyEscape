@@ -55,6 +55,7 @@ fun ProgrammedTripsScreen(
     var isEditingTrip by remember { mutableStateOf(false) }
     var showTripDialog by remember { mutableStateOf(false) }
     var currentTripId by remember { mutableStateOf(0) }
+    var currentUserId by remember { mutableStateOf("")}
     var tripDestination by remember { mutableStateOf("") }
     var startDate by remember { mutableStateOf("") }
     var endDate by remember { mutableStateOf("") }
@@ -120,6 +121,7 @@ fun ProgrammedTripsScreen(
                             tripDestination = trip.destination
                             startDate = trip.startDate
                             endDate = trip.endDate
+                            currentUserId = trip.userId
                             showTripDialog = true
                         },
                         onDelete = {
@@ -243,7 +245,8 @@ fun ProgrammedTripsScreen(
                                             id = currentTripId,
                                             destination = tripDestination.uppercase(),
                                             startDate = startDate,
-                                            endDate = endDate
+                                            endDate = endDate,
+                                            userId = currentUserId
                                         )
                                     )
                                 } else {
@@ -251,7 +254,8 @@ fun ProgrammedTripsScreen(
                                         Trip(
                                             destination = tripDestination.uppercase(),
                                             startDate = startDate,
-                                            endDate = endDate
+                                            endDate = endDate,
+                                            userId = currentUserId
                                         )
                                     )
                                 }

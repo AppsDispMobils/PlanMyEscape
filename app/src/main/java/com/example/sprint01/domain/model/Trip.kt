@@ -7,5 +7,6 @@ data class Trip(
     val destination: String,
     val startDate: String,
     val endDate: String,
+    val userId: String,
     val itineraryItems: List<ItineraryItem> = emptyList()
 )

@@ -16,6 +16,7 @@ import com.example.sprint01.ui.view.AboutUsScreen
 import com.example.sprint01.ui.view.TermsConditionsScreen
 import com.example.sprint01.ui.view.ProgrammedTripsScreen
 import com.example.sprint01.ui.view.PlanNewTripScreen
+import com.example.sprint01.ui.view.SignupScreen
 import com.example.sprint01.ui.view.TripDetailsScreen
 
 
@@ -23,6 +24,7 @@ import com.example.sprint01.ui.view.TripDetailsScreen
 fun NavGraph(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "login") {
         composable ("login") { LoginScreen(navController) }
+        composable ("signup") { SignupScreen(navController) }
         composable ("home") { HomeScreen(navController) }
         composable ("profile") { ProfileScreen(navController) }
         composable("settings"){SettingsScreen(navController)}

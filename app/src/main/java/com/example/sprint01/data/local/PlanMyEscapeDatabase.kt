@@ -4,12 +4,14 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.sprint01.data.local.dao.ItineraryItemDao
 import com.example.sprint01.data.local.dao.TripDao
+import com.example.sprint01.data.local.dao.UserDao
 import com.example.sprint01.data.local.entity.ItineraryItemEntity
 import com.example.sprint01.data.local.entity.TripEntity
+import com.example.sprint01.data.local.entity.UserEntity
 
 
 @Database(
-    entities = [TripEntity::class, ItineraryItemEntity::class],
+    entities = [TripEntity::class, ItineraryItemEntity::class, UserEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -17,4 +19,5 @@ import com.example.sprint01.data.local.entity.TripEntity
 abstract class PlanMyEscapeDatabase : RoomDatabase() {
     abstract fun tripDao(): TripDao
     abstract fun itineraryItemDao(): ItineraryItemDao
+    abstract fun userDao(): UserDao
 }
