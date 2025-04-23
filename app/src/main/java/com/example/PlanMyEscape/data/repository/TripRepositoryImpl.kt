@@ -32,7 +32,11 @@ class TripRepositoryImpl @Inject constructor(
 
     override suspend fun addTrip(trip: Trip) {
         Log.d("Database", "Adding trip in DB")
-        TripDao.addTrip(trip.toEntity())
+        try {
+            TripDao.addTrip(trip.toEntity())
+        } catch(e: Exception) {
+            Log.e("TripError", "Failed to add trip ${e.message}")
+        }
     }
 
 
@@ -42,8 +46,11 @@ class TripRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateTrip(trip: Trip) {
+
         Log.d("Database", "Updating trip in DB")
+        Log.d("database", trip.toString())
         TripDao.updateTrip(trip.toEntity())
+
     }
 
     override suspend fun validateTripDestination(tripDestination: String): Int {

@@ -9,7 +9,10 @@ import com.example.PlanMyEscape.domain.model.Trip
 import com.example.PlanMyEscape.domain.repository.AuthenticationRepository
 import com.example.PlanMyEscape.domain.repository.TripRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,9 +29,9 @@ class ProgrammedTripsViewModel @Inject constructor(
     }
 
     private fun loadTrips() {
-        trips.clear()
+        _trips.clear()
         viewModelScope.launch {
-            trips.addAll(tripRepository.getTrips())
+            _trips.addAll(tripRepository.getTrips())
             Log.d("Trip", "Showing all trips")
         }
     }
@@ -37,7 +40,6 @@ class ProgrammedTripsViewModel @Inject constructor(
         viewModelScope.launch {
             val userId = authRepository.getCurrentId()
             tripRepository.addTrip(trip.copy(userId = userId))
-            Log.d("Trip", "Added new trip: ${trip.destination}")
             loadTrips()
         }
     }

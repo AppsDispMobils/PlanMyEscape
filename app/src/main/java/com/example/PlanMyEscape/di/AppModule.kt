@@ -37,10 +37,6 @@ object AppModule {
     fun provideTripRepository(tripDao: TripDao, itineraryItemDao: ItineraryItemDao, authenticationRepository: AuthenticationRepository): TripRepository =
         TripRepositoryImpl(tripDao, itineraryItemDao, authenticationRepository)
 
-    @Provides
-    @Singleton
-    fun provideTripViewModel(trip: TripRepository, authenticationRepository: AuthenticationRepository): ProgrammedTripsViewModel =
-        ProgrammedTripsViewModel(trip, authenticationRepository)
 
     @Provides
     @Singleton
