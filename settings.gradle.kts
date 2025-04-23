@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Sprint01"
+rootProject.name = "PlanMyEscape"
 include(":app")

@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:730832560147:android:898a839a2db64c1b0c5fe6",
+        "mobilesdk_app_id": "1:730832560147:android:c5a1378a49235ff60c5fe6",
         "android_client_info": {
-          "package_name": "com.example.sprint01"
+          "package_name": "com.example.PlanMyEscape"
         }
       },
       "oauth_client": [],
