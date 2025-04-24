@@ -57,8 +57,8 @@
     <string name="Dark_Theme">Dark Theme</string>
 
     <string name="Login_Screen">Login Screen</string>
-    <string name="UsernameText">Username</string>
-    <string name="UsernameText1">Incorrect Username</string>
+    <string name="UsernameText">Email</string>
+    <string name="UsernameText1">Incorrect Email</string>
     <string name="PasswordText">Password</string>
     <string name="PasswordText1">Incorrect Password</string>
 

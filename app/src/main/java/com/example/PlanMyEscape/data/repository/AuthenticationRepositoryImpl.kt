@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -22,7 +23,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return firebaseAuth.signInWithEmailAndPassword(email, password)
     }
 
-    override suspend fun logOut() {
+    override  fun logOut() {
         firebaseAuth.signOut()
     }
 
@@ -57,6 +58,9 @@ class AuthenticationRepositoryImpl @Inject constructor(
 
     override suspend fun getCurrentId(): String {
         return firebaseAuth.currentUser?.uid.toString()
+    }
+    override  fun getCurrentUser(): FirebaseUser?{
+        return FirebaseAuth.getInstance().currentUser
     }
 
 }

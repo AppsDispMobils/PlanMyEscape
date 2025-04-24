@@ -57,8 +57,8 @@
     <string name="Dark_Theme">Tema Escuro</string>
 
     <string name="Login_Screen">Tela de Login</string>
-    <string name="UsernameText">Usuário</string>
-    <string name="UsernameText1">Usuário Incorreto</string>
+    <string name="UsernameText">E-mail</string>
+    <string name="UsernameText1">E-mail Incorreto</string>
     <string name="PasswordText">Senha</string>
     <string name="PasswordText1">Senha Incorreta</string>
 
