@@ -14,4 +14,6 @@ interface AuthenticationRepository {
     suspend fun checkAuthStatus(): Boolean
     suspend fun getCurrentId(): String
     fun getCurrentUser(): FirebaseUser?
+    suspend fun  sendPasswordResetEmail(email: String)
+    suspend fun recoverPassword(string: String): Boolean
 }

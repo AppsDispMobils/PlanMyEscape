@@ -62,5 +62,22 @@ class AuthenticationRepositoryImpl @Inject constructor(
     override  fun getCurrentUser(): FirebaseUser?{
         return FirebaseAuth.getInstance().currentUser
     }
+    override suspend fun sendPasswordResetEmail(email: String) {
+        try {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+        } catch (e: Exception) {
+            throw Exception("No se pudo enviar el correo de recuperación.")
+        }
+    }
+    override suspend fun recoverPassword(email: String): Boolean {
+        return try {
+
+            firebaseAuth.sendPasswordResetEmail(email).await()
+            true  // Si no hay errores, retornamos true
+        } catch (e: Exception) {
+            // Si ocurre algún error, mostramos el error y retornamos false
+            false
+        }
+    }
 
 }

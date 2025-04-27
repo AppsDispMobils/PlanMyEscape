@@ -69,4 +69,11 @@
     <string name="field_required">Faltan campos requeridos</string>
     <string name="invalid_date">Fecha no permitida</string>
     <string name="date_out_of_range">Fecha fuera del rango del viaje</string>
+    <string name="recover_password">Recover Password</string>
+    <string name="enter_email">Enter your email</string>
+    <string name="repeat_email">Repeat your email</string>
+    <string name="emails_do_not_match">Emails do not match</string>
+    <string name="send_email">Send Email</string>
+
+
 </resources>

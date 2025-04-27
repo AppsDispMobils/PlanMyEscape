@@ -68,4 +68,11 @@
     <string name="field_required">Campos obrigatórios ausentes</string>
     <string name="invalid_date">Data inválida</string>
     <string name="date_out_of_range">Data fora do intervalo da viagem</string>
+    <string name="recover_password">Recuperar Senha</string>
+    <string name="enter_email">Digite seu e-mail</string>
+    <string name="repeat_email">Repita seu e-mail</string>
+    <string name="emails_do_not_match">Os e-mails não coincidem</string>
+    <string name="send_email">Enviar e-mail</string>
+
+
 </resources>

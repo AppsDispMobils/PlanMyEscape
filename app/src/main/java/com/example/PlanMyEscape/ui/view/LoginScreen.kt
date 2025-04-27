@@ -144,6 +144,16 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(40.dp))
 
+        //boton de recuperar contraseña
+        TextButton(onClick = {
+            navController.navigate("recover")
+        }) {
+            Text(text = stringResource(id = R.string.recover_password))
+        }
+
+
+        Spacer(modifier = Modifier.height(40.dp))
+
         // Botón de inicio de sesión
         Button(
             onClick = {
@@ -161,6 +171,7 @@ fun LoginScreen(
         ) {
             Text(text = stringResource(id = R.string.Login_Text), fontSize = 16.sp, color = Color.Gray)
         }
+
         TextButton(onClick = {
             navController.navigate("signup")
         }) {

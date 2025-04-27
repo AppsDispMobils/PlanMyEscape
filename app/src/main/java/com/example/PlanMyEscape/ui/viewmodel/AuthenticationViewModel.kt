@@ -8,6 +8,7 @@ import com.example.PlanMyEscape.domain.model.User
 import com.example.PlanMyEscape.domain.repository.AuthenticationRepository
 import com.example.PlanMyEscape.ui.utils.sendEmailVerificationAsync
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,6 +21,9 @@ class AuthenticationViewModel @Inject constructor(
 
     private val _authState = MutableLiveData<AuthState>()
     val authState : LiveData<AuthState> = _authState
+
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
 
     init {
         checkAuthStatus()
@@ -51,9 +55,9 @@ class AuthenticationViewModel @Inject constructor(
                             val currentUser = authenticationRepository.getCurrentUser()
 
                             if (currentUser != null) {
-                                // Verificamos si el correo del usuario está verificado
+
                                 if (currentUser.isEmailVerified) {
-                                    // Si el correo está verificado, permitimos el acceso
+
                                     _authState.value = AuthState.Authenticated
                                 } else {
                                     // Si el correo no está verificado, cerramos sesión y notificamos al usuario
@@ -111,6 +115,24 @@ class AuthenticationViewModel @Inject constructor(
         }
     }
 
+    fun recoverPassword(email: String) {
+        viewModelScope.launch {
+            _authState.value = AuthState.Loading
+            try {
+                auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            _authState.value = AuthState.Success
+                        } else {
+                            _authState.value = AuthState.Error(task.exception?.localizedMessage ?: "Error desconocido")
+                        }
+                    }
+            } catch (e: Exception) {
+                _authState.value = AuthState.Error(e.localizedMessage ?: "Error desconocido")
+            }
+        }
+    }
+
 
 }
 
@@ -119,4 +141,5 @@ sealed class AuthState{
     object Unauthenticated : AuthState()
     object Loading : AuthState()
     data class Error(val message : String) : AuthState()
+    object Success : AuthState()
 }

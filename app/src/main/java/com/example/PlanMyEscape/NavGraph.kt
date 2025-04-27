@@ -18,6 +18,8 @@ import com.example.PlanMyEscape.ui.view.ProgrammedTripsScreen
 import com.example.PlanMyEscape.ui.view.PlanNewTripScreen
 import com.example.PlanMyEscape.ui.view.SignupScreen
 import com.example.PlanMyEscape.ui.view.TripDetailsScreen
+import com.example.PlanMyEscape.ui.view.RecoverPasswordScreen
+import com.example.PlanMyEscape.ui.viewmodel.AuthenticationViewModel
 
 
 @Composable
@@ -44,6 +46,8 @@ fun NavGraph(navController: NavHostController) {
             val tripEndDate = backStackEntry.arguments?.getString("tripEndDate") ?: ""
             TripDetailsScreen(navController, tripStartDate = tripStartDate, tripEndDate = tripEndDate)
         }
+        composable("recover") { RecoverPasswordScreen(navController) }
+
     }
 
 }
