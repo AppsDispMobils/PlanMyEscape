@@ -72,6 +72,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     override suspend fun recoverPassword(email: String): Boolean {
         return try {
 
+
             firebaseAuth.sendPasswordResetEmail(email).await()
             true  // Si no hay errores, retornamos true
         } catch (e: Exception) {
