@@ -26,7 +26,13 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField("String", "HOTELS_API_URL", "\"http://13.39.162.212\"")
+            buildConfigField("String", "GROUP_ID", "\"G03\"")
+        }
         release {
+            buildConfigField("String", "GROUP_ID", "\"G03\"")
+            buildConfigField("String", "HOTELS_API_URL", "\"http://13.39.162.212\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -75,12 +81,30 @@ dependencies {
     implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation (libs.androidx.appcompat)
     implementation(libs.firebase.auth)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     val room_version = "2.6.1"
 
     implementation("androidx.room:room-runtime:$room_version")
     kapt ("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
+    //retrofit
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //image
+    implementation("io.coil-kt:coil:2.5.0")
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+    implementation("androidx.compose.material:material-icons-extended")
+
+    //carrusel
+    implementation("androidx.compose.foundation:foundation:1.6.0")
+
+
 
 }
 
