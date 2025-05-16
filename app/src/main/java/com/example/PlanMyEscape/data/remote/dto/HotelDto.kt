@@ -1,7 +1,5 @@
 package com.example.PlanMyEscape.data.remote.dto
 
-
-
 data class HotelDto(
     val id: String,
     val name: String,

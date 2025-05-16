@@ -1,6 +1,5 @@
 package com.example.PlanMyEscape.data.remote.api
 
-import com.example.PlanMyEscape.data.remote.dto.*
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -13,8 +12,6 @@ interface HotelApiService {
     suspend fun getHotels(
         @Path("group_id") groupId: String
     ): List<HotelDto>
-
-    //importar retrofit correctamente
 
     @GET("hotels/{group_id}/availability")
     suspend fun getAvailability(

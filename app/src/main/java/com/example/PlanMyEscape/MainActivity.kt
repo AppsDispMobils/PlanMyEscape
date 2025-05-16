@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+
         var isChecking = true
         lifecycleScope.launch{
             delay(3000L)
