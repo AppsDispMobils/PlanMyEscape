@@ -1,14 +1,18 @@
 package com.example.PlanMyEscape.ui.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.PlanMyEscape.domain.model.Hotel
+import com.example.PlanMyEscape.domain.model.ReserveRequest
 import com.example.PlanMyEscape.domain.model.Room
 import com.example.PlanMyEscape.domain.repository.HotelRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,8 +44,37 @@ class HotelDetailsViewModel @Inject constructor(
         }
     }
 
-    fun reserveRoom(room: Room) {
-        /*TODO*/
+    fun reserveRoom(room: Room) = viewModelScope.launch {
+        Log.d("reserveRoom called", "room: $room")
+
+        val req = ReserveRequest(
+            hotelId = uiState.value.hotel!!.id,
+            roomId  = room.id,
+            startDate = start,
+            endDate   = end,
+            guestName = "mika",
+            guestEmail = "mika@gmail.com"
+        )
+
+        try {
+            hotelRepository.reserve(groupId, req)   // we ignore response here
+        } catch (e: HttpException) {
+            val decodedError = extractErrorMessage(e)
+            Log.e("BookViewModel", "HTTP error: ${decodedError}  $e")
+
+        } catch (e: Exception) {
+            Log.e("BookViewModel", "Error: ${e.localizedMessage}")
+        }
+    }
+
+    fun extractErrorMessage(e: HttpException): String {
+        return try {
+            val errorBody = e.response()?.errorBody()?.string()
+            val json = JSONObject(errorBody ?: "")
+            json.optString("detail", "Unknown error")
+        } catch (ex: Exception) {
+            "Unknown error"
+        }
     }
 
 
