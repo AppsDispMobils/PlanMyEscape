@@ -9,10 +9,13 @@ import com.example.PlanMyEscape.data.local.PlanMyEscapeDatabase
 import com.example.PlanMyEscape.data.local.dao.ItineraryItemDao
 import com.example.PlanMyEscape.data.local.dao.TripDao
 import com.example.PlanMyEscape.data.local.dao.UserDao
+import com.example.PlanMyEscape.data.remote.api.HotelApiService
 import com.example.PlanMyEscape.data.repository.AuthenticationRepositoryImpl
+import com.example.PlanMyEscape.data.repository.HotelRepositoryImpl
 import com.example.PlanMyEscape.domain.repository.TripRepository
 import com.example.PlanMyEscape.data.repository.TripRepositoryImpl
 import com.example.PlanMyEscape.domain.repository.AuthenticationRepository
+import com.example.PlanMyEscape.domain.repository.HotelRepository
 import com.example.PlanMyEscape.ui.viewmodel.ProgrammedTripsViewModel
 import dagger.Module
 import dagger.Provides
@@ -21,6 +24,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import com.google.firebase.auth.FirebaseAuth
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import okhttp3.logging.HttpLoggingInterceptor
 
 
 @Module
@@ -77,6 +84,38 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        return logging
+    }
+    @Provides
+    @Singleton
+    fun provideOkHttpClient( loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHotelApi(
+        okHttpClient: OkHttpClient
+    ): HotelApiService {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.HOTELS_API_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(HotelApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHotelRepository(api: HotelApiService): HotelRepository = HotelRepositoryImpl(api)
 
 
 

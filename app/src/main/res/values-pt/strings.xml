@@ -20,7 +20,7 @@
 
     <!-- Divisão das strings longas dos termos -->
     <string name="terms_and_condi0_part1">Bem-vindo ao Destinify. Ao acessar e usar nosso aplicativo, você concorda em cumprir os seguintes termos e condições.</string>
-    <string name="terms_and_condi0_part2">Se você não concordar com estes termos, pedimos que não use nosso aplicativo.</string>
+    <string name="terms_and_condi0_Reservarpart2">Se você não concordar com estes termos, pedimos que não use nosso aplicativo.</string>
 
     <string name="terms_and_condi1_part1">1. Uso do Aplicativo\nO aplicativo Destinify permite planejar e gerenciar viagens.</string>
     <string name="terms_and_condi1_part2">Você concorda em usar este aplicativo apenas para fins legais e de acordo com estes Termos e Condições.</string>
@@ -54,6 +54,7 @@
     <string name="Plan_New_Trip">Planejar Nova Viagem</string>
     <string name="Profile">Perfil</string>
     <string name="Home">Início</string>
+    <string name="Book">Reserva</string>
     <string name="Dark_Theme">Tema Escuro</string>
 
     <string name="Login_Screen">Tela de Login</string>

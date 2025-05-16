@@ -13,6 +13,8 @@ import com.example.PlanMyEscape.ui.view.HomeScreen
 import com.example.PlanMyEscape.ui.view.ProfileScreen
 
 import com.example.PlanMyEscape.ui.view.AboutUsScreen
+import com.example.PlanMyEscape.ui.view.BookScreen
+import com.example.PlanMyEscape.ui.view.HotelDetailsScreen
 import com.example.PlanMyEscape.ui.view.TermsConditionsScreen
 import com.example.PlanMyEscape.ui.view.ProgrammedTripsScreen
 import com.example.PlanMyEscape.ui.view.PlanNewTripScreen
@@ -28,6 +30,7 @@ fun NavGraph(navController: NavHostController) {
         composable ("login") { LoginScreen(navController) }
         composable ("signup") { SignupScreen(navController) }
         composable ("home") { HomeScreen(navController) }
+        composable ("book") { BookScreen(navController) }
         composable ("profile") { ProfileScreen(navController) }
         composable("settings"){SettingsScreen(navController)}
         composable ("aboutUs") { AboutUsScreen(navController) }
@@ -35,11 +38,25 @@ fun NavGraph(navController: NavHostController) {
         composable ("programmedTrips") { ProgrammedTripsScreen(navController) }
         composable ("planNewTrip") { PlanNewTripScreen(navController) }
         composable(
+            route = "hotelDetails/{hotelId}/{startDate}/{endDate}",
+            arguments = listOf(
+                navArgument("hotelId") { type = NavType.StringType },
+                navArgument("startDate") { type = NavType.StringType },
+                navArgument("endDate") { type = NavType.StringType}
+            )
+        ){
+            backStackEntry ->
+            val hotelId = backStackEntry.arguments?.getString("hotelId") ?: ""
+            val startDate = backStackEntry.arguments?.getString("startDate") ?: ""
+            val endDate = backStackEntry.arguments?.getString("endDate") ?: ""
+            HotelDetailsScreen(hotelId = hotelId, startDate = startDate, endDate = endDate, navController = navController)
+        }
+        composable(
             route =  "tripDetails/{tripId}/{tripStartDate}/{tripEndDate}",
             arguments = listOf(
                 navArgument("tripId") { type = NavType.IntType },
                 navArgument("tripStartDate") { type = NavType.StringType },
-                navArgument("tripEndDate") { type = NavType.StringType })
+                navArgument("tripEndDate") { type = NavType.StringType }),
         ) {
             backStackEntry ->
             val tripStartDate = backStackEntry.arguments?.getString("tripStartDate") ?: ""

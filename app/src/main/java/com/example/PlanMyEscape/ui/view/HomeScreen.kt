@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -193,6 +194,27 @@ fun BottomNavigationBar(
             onClick = {
                 Log.d("BottomNavigation", "Navigating to home screen")
                 navController.navigate("home")
+            }
+        )
+
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    Icons.Outlined.Search,
+                    contentDescription = "Book",
+                    tint = Color.Gray
+                )
+            },
+            label = {
+                Text(
+                    text = stringResource(id = R.string.Book),
+                    color = Color.Gray
+                )
+            },
+            selected = selectedIndex == 2,
+            onClick = {
+                Log.d("BottomNavigation", "Navigating to home screen")
+                navController.navigate("book")
             }
         )
     }
