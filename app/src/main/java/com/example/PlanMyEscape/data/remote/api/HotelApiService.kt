@@ -1,5 +1,6 @@
 package com.example.PlanMyEscape.data.remote.api
 
+import com.example.PlanMyEscape.data.remote.dto.*
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
