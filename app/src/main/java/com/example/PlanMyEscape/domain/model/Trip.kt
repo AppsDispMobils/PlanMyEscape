@@ -1,5 +1,7 @@
 package com.example.PlanMyEscape.domain.model
 
+import android.net.Uri
+
 //Data travel Object for Trip
 
 data class Trip(
@@ -8,5 +10,6 @@ data class Trip(
     val startDate: String,
     val endDate: String,
     val userId: String,
-    val itineraryItems: List<ItineraryItem> = emptyList()
+    val itineraryItems: List<ItineraryItem> = emptyList(),
+    val images: MutableList<Uri> = mutableListOf()
 )

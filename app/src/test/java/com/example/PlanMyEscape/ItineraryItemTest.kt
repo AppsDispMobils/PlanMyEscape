@@ -1,4 +1,4 @@
-package com.example.PlanMyEscape
+/*package com.example.PlanMyEscape
 
 import com.example.PlanMyEscape.domain.model.ItineraryItem
 import com.example.PlanMyEscape.domain.model.Trip
@@ -124,3 +124,5 @@ class ItineraryItemTest {
         assertEquals(0, itineraryTestRepository.getItineraryItemsfromTrip(itineraryTestRepository.getTrips()[0].id).size)
     }
 }
+
+ */

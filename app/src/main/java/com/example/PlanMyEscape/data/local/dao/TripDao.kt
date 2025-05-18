@@ -3,8 +3,12 @@ package com.example.PlanMyEscape.data.local.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
+import com.example.PlanMyEscape.data.TripWithImages
+import com.example.PlanMyEscape.data.local.entity.ImageEntity
 import com.example.PlanMyEscape.data.local.entity.TripEntity
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -23,4 +27,14 @@ interface TripDao {
 
     @Query("SELECT count(*) FROM trips WHERE destination = :tripDestination AND userId = :userId")
     suspend fun validateTripDestination(tripDestination: String, userId: String): Int
+
+    @Transaction
+    @Query("SELECT * FROM trips")
+    fun getTripsWithImages(): Flow<List<TripWithImages>>
+
+    @Insert
+    suspend fun insertImage(image: ImageEntity)
+
+    @Query("DELETE FROM image WHERE uri = :uri")
+    suspend fun deleteImageByUri(uri: String)
 }

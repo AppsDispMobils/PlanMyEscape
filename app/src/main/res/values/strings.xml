@@ -7,11 +7,16 @@
     <string name="about_us">Sobre Nosotros</string>
 
     <!-- División de las cadenas largas -->
-    <string name="about_us1_part1">Plan My Escape es una aplicación desarollada por dos estudiantes de UDL Igualada,</string>
-    <string name="about_us1_part2">que esta en fase Beta,  que te permite planificar y gestionar tus viajes de forma sencilla y rápida.</string>
+    <string name="about_us1_part1">Plan My Escape es una aplicación
+desarollada por dos estudiantes de UDL Igualada,</string>
+    <string name="about_us1_part2">que esta en fase Beta,  que te
+permite planificar y gestionar tus viajes de forma sencilla y
+rápida.</string>
 
-    <string name="about_us2_part1">Desarrollada por el equipo de Plan My Escape. Todos los derechos estan reservados,</string>
-    <string name="about_us2_part2">y no tenemos problema en usar la justicia.</string>
+    <string name="about_us2_part1">Desarrollada por el equipo de Plan
+My Escape. Todos los derechos estan reservados,</string>
+    <string name="about_us2_part2">y no tenemos problema en usar la
+justicia.</string>
 
     <string name="about_usBoton">Volver</string>
     <string name="version1">Información de la aplicación</string>
@@ -19,19 +24,37 @@
     <string name="terms_and_condi">Terminos y Condiciones</string>
 
     <!-- División de las cadenas largas de términos -->
-    <string name="terms_and_condi0_part1">Bienvenido a Destinify. Al acceder y usar nuestra aplicación, usted acepta cumplir con los siguientes términos y condiciones.</string>
-    <string name="terms_and_condi0_part2">Si no está de acuerdo con estos términos, le solicitamos que no utilice nuestra aplicación.</string>
+    <string name="terms_and_condi0_part1">Bienvenido a Destinify. Al
+acceder y usar nuestra aplicación, usted acepta cumplir con los
+siguientes términos y condiciones.</string>
+    <string name="terms_and_condi0_part2">Si no está de acuerdo con
+estos términos, le solicitamos que no utilice nuestra
+aplicación.</string>
 
-    <string name="terms_and_condi1_part1">1. Uso de la Aplicación\nLa aplicación Destinify le permite planificar y gestionar viajes.</string>
-    <string name="terms_and_condi1_part2">Usted acepta utilizar esta aplicación solo para fines legales y de acuerdo con estos Términos y Condiciones.</string>
-    <string name="terms_and_condi1_part3">Queda prohibido el uso de la aplicación para realizar actividades ilegales o no autorizadas.</string>
+    <string name="terms_and_condi1_part1">1. Uso de la Aplicación\nLa
+aplicación Destinify le permite planificar y gestionar
+viajes.</string>
+    <string name="terms_and_condi1_part2">Usted acepta utilizar esta
+aplicación solo para fines legales y de acuerdo con estos Términos y
+Condiciones.</string>
+    <string name="terms_and_condi1_part3">Queda prohibido el uso de la
+aplicación para realizar actividades ilegales o no
+autorizadas.</string>
 
-    <string name="terms_and_condi2_part1">2. Terminación\nDestinify se reserva el derecho de suspender o cancelar su cuenta en cualquier momento y sin previo aviso</string>
-    <string name="terms_and_condi2_part2">si se detecta un uso indebido de la aplicación o si infringe estos términos.</string>
+    <string name="terms_and_condi2_part1">2. Terminación\nDestinify se
+reserva el derecho de suspender o cancelar su cuenta en cualquier
+momento y sin previo aviso</string>
+    <string name="terms_and_condi2_part2">si se detecta un uso
+indebido de la aplicación o si infringe estos términos.</string>
 
-    <string name="terms_and_condi3_part1">3. Ley Aplicable\nEstos Términos y Condiciones se regirán e interpretarán de acuerdo con las leyes del estado Español,</string>
-    <string name="terms_and_condi3_part2">sin tener en cuenta sus disposiciones sobre conflicto de leyes.</string>
-    <string name="terms_and_condi3_part3">Cualquier disputa que surja de estos términos se resolverá en los tribunales competentes del Tribunal Superior de Justicia de Cataluña.</string>
+    <string name="terms_and_condi3_part1">3. Ley Aplicable\nEstos
+Términos y Condiciones se regirán e interpretarán de acuerdo con las
+leyes del estado Español,</string>
+    <string name="terms_and_condi3_part2">sin tener en cuenta sus
+disposiciones sobre conflicto de leyes.</string>
+    <string name="terms_and_condi3_part3">Cualquier disputa que surja
+de estos términos se resolverá en los tribunales competentes del
+Tribunal Superior de Justicia de Cataluña.</string>
 
     <string name="settings"> Configuracion</string>
     <string name="change_password">Cambiar Contraseña </string>
@@ -54,7 +77,7 @@
     <string name="Plan_New_Trip">Planificar un nuevo Viaje</string>
     <string name="Profile">Perfil</string>
     <string name="Home">Inicio App</string>
-    <string name="Book">Reservar</string>
+    <string name="Book">Libro</string>
     <string name="Dark_Theme">Tema Oscuro</string>
 
     <string name="Login_Screen">Inicio de Sesión</string>
@@ -65,7 +88,8 @@
 
     <string name="Login_Text">Iniciar Sesion</string>
     <string name="Login_Error">Error Iniciar Sesion</string>
-    <string name="Login_Error1">Incorrect username or password. Please try again.</string>
+    <string name="Login_Error1">Incorrect username or password. Please
+try again.</string>
     <string name="field_required">Campos obligatorios ausentes</string>
     <string name="invalid_date">Fecha inválida</string>
     <string name="date_out_of_range">Fecha fuera del rango del viaje</string>
@@ -74,6 +98,25 @@
     <string name="repeat_email">Repite tu correo</string>
     <string name="emails_do_not_match">Los correos no coinciden</string>
     <string name="send_email">Enviar correo</string>
+
+    <string name="gallery_title">%s Galería</string>
+    <string name="back">Atrás</string>
+    <string name="add_image">Añadir imagen</string>
+    <string name="no_images_yet">Aún no hay imágenes</string>
+    <string name="zoom_image">Zoom imagen</string>
+    <string name="delete_image">Eliminar imagen</string>
+    <string name="delete_confirmation_title">¿Eliminar imagen?</string>
+    <string name="delete_confirmation_message">Esta acción no se puede
+deshacer.</string>
+    <string name="delete">Eliminar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="take_photo">Tomar foto</string>
+    <string name="choose_from_gallery">Elegir de la galería</string>
+    <string name="metadata_error">No se pudieron leer los metadatos</string>
+
+
+
+
 
 
 </resources>

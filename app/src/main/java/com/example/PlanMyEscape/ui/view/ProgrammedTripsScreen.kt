@@ -18,6 +18,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import android.app.DatePickerDialog
 import android.util.Log
+import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -59,6 +60,7 @@ fun ProgrammedTripsScreen(
     var tripDestination by remember { mutableStateOf("") }
     var startDate by remember { mutableStateOf("") }
     var endDate by remember { mutableStateOf("") }
+
 
     //Validacion datos de entrada
     var dateError by remember { mutableStateOf<String?>(null) }
@@ -126,6 +128,9 @@ fun ProgrammedTripsScreen(
                         },
                         onDelete = {
                             viewModel.deleteTrip(trip.id)
+                        },
+                        onGallery = { selectedTrip ->
+                            navController.navigate("gallery/${selectedTrip.id}")
                         }
                     )
                 }
@@ -374,7 +379,8 @@ fun TripCard(
     trip: Trip,
     onOpen: () -> Unit,
     onEdit: () -> Unit,
-    onDelete: () -> Unit) {
+    onDelete: () -> Unit,
+    onGallery: (Trip) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -402,6 +408,13 @@ fun TripCard(
                         contentDescription = "Eliminar Viaje"
                     )
                 }
+                IconButton(onClick = { onGallery(trip) }) {
+                    Icon(
+                        imageVector = Icons.Default.PhotoLibrary,
+                        contentDescription = "Acceder Galeria"
+                    )
+                }
+
             }
 
         }

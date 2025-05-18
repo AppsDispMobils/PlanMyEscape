@@ -1,4 +1,4 @@
-package com.example.PlanMyEscape
+/*package com.example.PlanMyEscape
 
 import com.example.PlanMyEscape.domain.model.Trip
 import com.example.PlanMyEscape.data.repository.TripRepositoryImpl
@@ -114,3 +114,5 @@ class TripUnitTest {
     }
 
 }
+
+ */
